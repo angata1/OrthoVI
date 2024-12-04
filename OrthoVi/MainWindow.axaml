@@ -1,0 +1,103 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="OrthoVi.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Width="900"
+        Height="590"
+        Background="#FFE8F9FC"
+        CanResize="False">
+
+	
+	
+	
+	<Grid>
+		
+		<!-- Log In -->
+		<Border
+         Background="#FF3DC6E1"
+         BorderThickness="0"
+         CornerRadius="3"
+         BoxShadow="5 0 45 0 LightGray"
+		 HorizontalAlignment="Left"
+		 Height="590" VerticalAlignment="Center" Width="223">
+			<Border.Background>
+				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+					<GradientStop Color="#FF3DC6E1" Offset="0.0" />
+					<GradientStop Color="#FF90E0EF" Offset="1.0" />
+				</LinearGradientBrush>
+			</Border.Background>
+		<Rectangle HorizontalAlignment="Left" Height="590" VerticalAlignment="Center" Width="223">
+		</Rectangle>
+		</Border>
+
+		<!-- Sign Up -->
+		<Border
+         Background="#FF3DC6E1"
+         BorderThickness="0"
+         BoxShadow="-5 0 45 0 LightGray"
+		HorizontalAlignment="Right" Height="590"
+		 VerticalAlignment="Center" Width="245" Margin="0,0,0,0">
+			<Border.Background>
+				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+					<GradientStop Color="#FF3DC6E1" Offset="0.0" />
+					<GradientStop Color="#FF90E0EF" Offset="1.0" />
+				</LinearGradientBrush>
+			</Border.Background>
+		<Rectangle HorizontalAlignment="Right" Height="590" VerticalAlignment="Center" Width="245" Margin="0,0,0,0">
+		</Rectangle>
+		</Border>
+
+		<!-- Log In Container -->
+		<Border Margin="26,130,481,65" CornerRadius="10" Background="#FFB2F3FF" BoxShadow="0 5 60 -5 #65082635">
+			<Border.Background>
+				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+					<GradientStop Color="#FFB2F3FF" Offset="0.0" />
+					<GradientStop Color="#FF90E0EF" Offset="1.0" />
+				</LinearGradientBrush>
+			</Border.Background>
+			<Canvas>
+				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
+				<TextBox Width="327" Height="30" Canvas.Left="26" Canvas.Top="80" Background="#FFE8F9FC" BorderThickness="0" />
+				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="144" />
+				<TextBox Width="327" Height="30" Canvas.Left="26" Canvas.Top="203" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*"/>
+				<Button Content="Log In" Width="212" Height="70" FontSize="36" Foreground="White" Canvas.Left="90" Canvas.Top="280" Background="#FF1FA8D6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation">
+					<Button.Resources>
+						<SolidColorBrush x:Key="OnHoverColor" Color="#FF0088B6"/>
+						<SolidColorBrush x:Key="OnHoverTextColor" Color="White"/>
+					</Button.Resources>
+				</Button>
+
+			</Canvas>
+		</Border>
+
+		<!-- Sign Up Container -->
+		<Border Margin="480,130,27,65" CornerRadius="10" Background="#FFB2F3FF" BoxShadow="0 5 60 -5 #65082635">
+			<Border.Background>
+				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+					<GradientStop Color="#FFB2F3FF" Offset="0.0" />
+					<GradientStop Color="#FF90E0EF" Offset="1.0" />
+				</LinearGradientBrush>
+			</Border.Background>
+			<Canvas>
+				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
+				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="85" Background="#FFE8F9FC" BorderThickness="0" />
+				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="149" />
+				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="208" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*"/>
+				<Button Content="Sign Up" Width="212" Height="70" Canvas.Left="90" Canvas.Top="285" FontSize="36" Background="#FF1FA8D6" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation">
+					<Button.Resources>
+						<SolidColorBrush x:Key="OnHoverColor" Color="#FF0088B6"/>
+						<SolidColorBrush x:Key="OnHoverTextColor" Color="White"/>
+					</Button.Resources>
+				</Button>
+			</Canvas>
+		</Border>
+
+		<!-- Labels and Buttons -->
+		<TextBlock Text="Log In" HorizontalAlignment="Left" Margin="27,44,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontWeight="Bold" />
+		<TextBlock Text="Sign Up" HorizontalAlignment="Right" Margin="0,44,27,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontWeight="Bold" />
+		<Border CornerRadius="3"></Border>
+		<Button Content="X" Padding="8 3" Width="28" Height="28" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Background="#FFE96365" Foreground="White" FontSize="16" />
+		<Button Content="-" Padding="10 3" Width="28" Height="28" HorizontalAlignment="Right" Margin="0,10,50,0" VerticalAlignment="Top" Background="#FFBAF4FF" Foreground="#FF082635" FontSize="16" />
+		<TextBlock Text="Welcome" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FF082635" FontWeight="Bold" />
+	</Grid>
+</Window>

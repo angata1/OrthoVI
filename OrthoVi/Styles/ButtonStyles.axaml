@@ -1,0 +1,62 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Design.PreviewWith>
+		<StackPanel Width="300" Height="300">
+			<!-- Log In Button with customized hover colors -->
+			<Button Content="Log In" Width="212" Margin="50" Height="70" FontSize="36" Foreground="White"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Classes="MainButtonAnimation">
+				<Button.Resources>
+					<!-- Override DynamicResources for this button -->
+					<SolidColorBrush x:Key="OnHoverColor" Color="Black"/>
+					<SolidColorBrush x:Key="OnHoverTextColor" Color="White"/>
+				</Button.Resources>
+			</Button>
+
+			<!-- Sign Up Button with customized hover colors -->
+			<Button Content="Sign Up" HorizontalAlignment="Center" Width="212" Height="70" FontSize="36"
+                    Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Classes="MainButtonAnimation">
+				<Button.Resources>
+					<!-- Override DynamicResources for this button -->
+					<SolidColorBrush x:Key="OnHoverColor" Color="#FF0088B6"/>
+					<SolidColorBrush x:Key="OnHoverTextColor" Color="White"/>
+				</Button.Resources>
+			</Button>
+		</StackPanel>
+	</Design.PreviewWith>
+
+	<Style Selector="Button.MainButtonAnimation">
+		<Setter Property="Background" Value="#FF1FA8D6" />
+		<Setter Property="CornerRadius" Value="10"/>
+		<Setter Property="Transitions">
+			<Transitions>
+				<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.3"/>
+				<BrushTransition Property="Background" Duration="0:0:0.8"/>
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<Style Selector="Button.MainButtonAnimation:pointerover">
+		<Setter Property="Background" Value="{DynamicResource OnHoverColor}"/>
+		<Setter Property="CornerRadius" Value="30"/>
+	</Style>
+
+	<Style Selector="Button.MainButtonAnimation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="TextBlock.Foreground" Value="{DynamicResource OnHoverTextColor}"/>
+		<Setter Property="TextBlock.Background" Value="{DynamicResource OnHoverColor}"/>
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="TextBlock.Background" Duration="0:0:0.5"/>
+			</Transitions>
+		</Setter>
+	</Style>
+
+
+
+
+
+
+
+</Styles>
