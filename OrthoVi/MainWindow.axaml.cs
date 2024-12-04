@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using System;
 
 namespace OrthoVi
 {
@@ -8,5 +10,12 @@ namespace OrthoVi
         {
             InitializeComponent();
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+
     }
 }
