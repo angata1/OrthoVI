@@ -1,0 +1,30 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <Button Width="50" Height="50" CornerRadius="0" Classes="ImageButtonAnimation"/>
+    </Border>
+  </Design.PreviewWith>
+
+	<Style Selector="Button.ImageButtonAnimation">
+		<Setter Property="Background" Value="#FF47BDE4"/>
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="Background" Duration="0:0:0.5" />
+			</Transitions>
+		</Setter>
+	</Style>
+	<Style Selector="Button.ImageButtonAnimation:pointerover">
+		<Setter Property="Background" Value="#FF0397C9" />
+	</Style>
+
+	<Style Selector="Button.ImageButtonAnimation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="TextBlock.Foreground" Value="White"/>
+		<Setter Property="TextBlock.Background" Value="#FF0397C9" />
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="TextBlock.Background" Duration="0:0:0.5" />
+			</Transitions>
+		</Setter>
+	</Style>
+</Styles>

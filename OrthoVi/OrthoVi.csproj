@@ -22,5 +22,6 @@
 	<ItemGroup>
 		<AvaloniaXaml Include="Styles\ButtonStyles.axaml" />
 		<AvaloniaXaml Include="Styles\CloseButton.axaml" />
+		<AvaloniaXaml Include="Styles\ImagesButton.axaml" />
 	</ItemGroup>
 </Project>
