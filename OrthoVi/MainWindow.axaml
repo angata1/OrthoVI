@@ -100,8 +100,18 @@
 		<TextBlock Text="Log In" HorizontalAlignment="Left" Margin="27,44,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontWeight="Bold" />
 		<TextBlock Text="Sign Up" HorizontalAlignment="Right" Margin="0,44,27,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontWeight="Bold" />
 		<Border CornerRadius="3"></Border>
-		<Button Content="X" Padding="8 3" Width="28" Height="28" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top"  Foreground="White" FontSize="16" Click="CloseButton_Click"  Classes="CloseButtonAnimation">
-		</Button>
+		<Button x:Name="CloseButton"
+				Content="X"
+				Padding="8 3"
+				Width="28"
+				Height="28"
+				HorizontalAlignment="Right"
+				Margin="10"
+				VerticalAlignment="Top"
+				Foreground="White"
+				FontSize="16"
+				Click="CloseButton_Click"
+				Classes="CloseButtonAnimation" />
 		<Button Content="-" Padding="10 3" Width="28" Height="28" HorizontalAlignment="Right" Margin="0,10,50,0" VerticalAlignment="Top" Background="#FFBAF4FF" Foreground="#FF082635" FontSize="16" />
 		<TextBlock Text="Welcome" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FF082635" FontWeight="Bold" />
 	</Grid>

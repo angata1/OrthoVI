@@ -8,7 +8,7 @@
 		<FluentTheme/>
 		
 			<StyleInclude Source="/Styles/ButtonStyles.axaml" />
-			
+		<StyleInclude Source="/Styles/CloseButton.axaml" />
 		
 	</Application.Styles>
 </Application>
