@@ -32,7 +32,7 @@
 	  
 	 
 	  <Grid Background="Transparent" Width="807" HorizontalAlignment="Right">
-		<TextBlock Text="WELCOME, DR. NAME" FontSize="56" FontWeight="Bold" Foreground="#FF082635"  Margin="30,41,0,0"/>
+		<TextBlock Text="WELCOME, DR. NAME" FontFamily="{StaticResource KoHoFont}"  FontSize="56" Foreground="#FF082635"  Margin="30,41,0,0"/>
 		<TextBlock Text="LAST PATIENTS" FontSize="24" FontWeight="Bold" Foreground="#FF082635"  Margin="45,142,0,0"/>
 		  <!--Image Container-->
 		  <Border BoxShadow="-0 5 10 0 LightGray" Width="721" Height="156"  Margin="0,-60,0,0" Padding="13" HorizontalAlignment="Center" CornerRadius="25">

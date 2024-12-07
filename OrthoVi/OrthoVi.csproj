@@ -8,20 +8,54 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
+  <!-- Remove conflicting "None" entries -->
   <ItemGroup>
+    <None Remove="Assets\Fonts\KoHo-Bold.ttf" />
+    <None Remove="Assets\Fonts\KoHo-BoldItalic.ttf" />
+    <None Remove="Assets\Fonts\KoHo-ExtraLight.ttf" />
+    <None Remove="Assets\Fonts\KoHo-ExtraLightItalic.ttf" />
+    <None Remove="Assets\Fonts\KoHo-Italic.ttf" />
+    <None Remove="Assets\Fonts\KoHo-Light.ttf" />
+    <None Remove="Assets\Fonts\KoHo-LightItalic.ttf" />
+    <None Remove="Assets\Fonts\KoHo-Medium.ttf" />
+    <None Remove="Assets\Fonts\KoHo-MediumItalic.ttf" />
+    <None Remove="Assets\Fonts\KoHo-Regular.ttf" />
+    <None Remove="Assets\Fonts\KoHo-SemiBold.ttf" />
+    <None Remove="Assets\Fonts\KoHo-SemiBoldItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Package references -->
     <PackageReference Include="Avalonia" Version="11.2.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Include="Avalonia.Diagnostics" Version="11.2.1">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-	<ItemGroup>
-		<AvaloniaXaml Include="Styles\ButtonStyles.axaml" />
-		<AvaloniaXaml Include="Styles\CloseButton.axaml" />
-		<AvaloniaXaml Include="Styles\ImagesButton.axaml" />
-	</ItemGroup>
+
+  <!-- XAML Styles -->
+  <ItemGroup>
+    <AvaloniaXaml Include="Styles\ButtonStyles.axaml" />
+    <AvaloniaXaml Include="Styles\CloseButton.axaml" />
+    <AvaloniaXaml Include="Styles\ImagesButton.axaml" />
+  </ItemGroup>
+
+  <!-- Embedded Font Resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Fonts\KoHo-Bold.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-BoldItalic.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-ExtraLight.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-ExtraLightItalic.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-Italic.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-Light.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-LightItalic.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-Medium.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-MediumItalic.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-Regular.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-SemiBold.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\KoHo-SemiBoldItalic.ttf" />
+  </ItemGroup>
 </Project>

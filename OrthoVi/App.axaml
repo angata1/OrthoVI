@@ -5,6 +5,7 @@
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
 	<Application.Styles>
+		
 		<FluentTheme/>
 		
 		<StyleInclude Source="/Styles/ButtonStyles.axaml" />
@@ -12,4 +13,9 @@
 		<StyleInclude Source="/Styles/ImagesButton.axaml" />
 		
 	</Application.Styles>
+
+	<Application.Resources>
+		<FontFamily x:Key="KoHoFont">avares://OrthoVi/Assets/Fonts#KoHo</FontFamily>
+	</Application.Resources>
+	
 </Application>
