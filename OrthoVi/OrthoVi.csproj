@@ -45,17 +45,6 @@
 
   <!-- Embedded Font Resources -->
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Fonts\KoHo-Bold.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-BoldItalic.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-ExtraLight.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-ExtraLightItalic.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-Italic.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-Light.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-LightItalic.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-Medium.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-MediumItalic.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-Regular.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-SemiBold.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\KoHo-SemiBoldItalic.ttf" />
+	  <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 </Project>
