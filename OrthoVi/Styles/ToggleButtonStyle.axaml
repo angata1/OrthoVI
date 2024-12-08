@@ -1,0 +1,73 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="50">
+			<ToggleButton Classes="ToggleButtonAnimation" Content="FEMALE"
+                          FontSize="20"
+                          FontWeight="Bold"
+                          Width="134"
+                          Height="35"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          BorderBrush="Transparent"/>
+		</Border>
+	</Design.PreviewWith>
+
+	<!-- Default Style -->
+	<Style Selector="ToggleButton.ToggleButtonAnimation">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background">
+			<Setter.Value>
+				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+					<GradientStops>
+						<GradientStop Offset="0.0" Color="#FF47BDE4" />
+						<GradientStop Offset="1.0" Color="#FF0397C9" />
+					</GradientStops>
+				</LinearGradientBrush>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="CornerRadius" Value="10" />
+		<Setter Property="Transitions">
+			<Transitions>
+				<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.2" />
+				<BrushTransition Property="Background" Duration="0:0:0.5" />
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<!-- Hover Style -->
+	<Style Selector="ToggleButton.ToggleButtonAnimation:pointerover">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#FF0088B6" />
+		<Setter Property="CornerRadius" Value="30" />
+	</Style>
+
+	<!-- Checked Style (Same as Hover) -->
+	<Style Selector="ToggleButton.ToggleButtonAnimation:checked">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#FF0088B6" />
+		<Setter Property="CornerRadius" Value="30" />
+	</Style>
+
+	<!-- ContentPresenter Hover State -->
+	<Style Selector="ToggleButton.ToggleButtonAnimation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="TextBlock.Foreground" Value="White"/>
+		<Setter Property="TextBlock.Background" Value="#FF0088B6" />
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="TextBlock.Background" Duration="0:0:0.5" />
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<!-- ContentPresenter Checked State -->
+	<Style Selector="ToggleButton.ToggleButtonAnimation:checked /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="TextBlock.Foreground" Value="White"/>
+		<Setter Property="TextBlock.Background" Value="#FF0088B6" />
+		<Setter Property="Transitions">
+			<Transitions>
+				<BrushTransition Property="TextBlock.Background" Duration="0:0:0.5" />
+			</Transitions>
+		</Setter>
+	</Style>
+</Styles>

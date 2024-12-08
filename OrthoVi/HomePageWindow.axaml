@@ -8,7 +8,6 @@
 		 WindowStartupLocation="CenterScreen"
         Width="900"
         Height="590"
-        
         CanResize="False"
 		ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
@@ -20,53 +19,94 @@
 			<GradientStop Color="#FFE8F9FC" Offset="1.0" />
 		</LinearGradientBrush>
 	</Window.Background>
-  
+
+	<Window.Styles>
+		<!-- Style for all TextBlocks -->
+		<Style Selector="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+		</Style>
+
+		<!-- Style for Buttons -->
+		<Style Selector="Button">
+			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+		</Style>
+
+		<!-- Style for TextBoxes -->
+		<Style Selector="TextBox">
+			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+		</Style>
+	</Window.Styles>
   
   <Grid>
 
-	  <Border Name="DraggableArea"
-			   Height="50"
-			   VerticalAlignment="Top"
-			   Background="Transparent"
-			   Cursor="Hand"/>
-	  
-	 
+	  <!--Main Container-->
 	  <Grid Background="Transparent" Width="807" HorizontalAlignment="Right">
-		<TextBlock Text="WELCOME, DR. NAME" FontFamily="{StaticResource KoHoFont}"  FontSize="56" Foreground="#FF082635"  Margin="30,41,0,0"/>
+		  
+		<TextBlock Text="WELCOME, DR. NAME" FontWeight="Bold"  FontSize="58" Foreground="#FF082635"  Margin="30,41,0,0"/>
 		<TextBlock Text="LAST PATIENTS" FontSize="24" FontWeight="Bold" Foreground="#FF082635"  Margin="45,142,0,0"/>
-		  <!--Image Container-->
-		  <Border BoxShadow="-0 5 10 0 LightGray" Width="721" Height="156"  Margin="0,-60,0,0" Padding="13" HorizontalAlignment="Center" CornerRadius="25">
+		  <!--Container for Last Patients-->
+		  <Border BoxShadow="-0 5 10 0 LightGray"
+				  Width="721"
+				  Height="156" 
+				  Margin="0,-60,0,0"
+				  Padding="13" 
+				  HorizontalAlignment="Center" 
+				  CornerRadius="25"> 
+	
 			  <Border.Background>
 					  <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
 						  <GradientStop Color="#FFB2F3FF" Offset="0.0" />
 						  <GradientStop Color="#FF90E0EF" Offset="1.0" />
 					  </LinearGradientBrush>
 				  </Border.Background>
+			  
 			  <StackPanel Orientation="Horizontal" Spacing="45" HorizontalAlignment="Center">
 				  <StackPanel Spacing="5"> 
 					<Button Classes="ImageButtonAnimation" Width="116" Height="108"/>
-					  <TextBlock Text="First Name" FontSize="18" Foreground="#FF082635"/>
+					  <TextBlock Text="First Name" FontSize="20" Foreground="#FF082635"/>
 				  </StackPanel>
 				  <StackPanel Spacing="5">
 					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Foreground="#FF082635"/>
-					  <TextBlock Text="First Name" FontSize="18"/>
+					  <TextBlock Text="First Name" FontSize="20"/>
 				  </StackPanel>
 				  <StackPanel Spacing="5">
 					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Foreground="#FF082635"/>
-					  <TextBlock Text="First Name" FontSize="18"/>
+					  <TextBlock Text="First Name" FontSize="20"/>
 				  </StackPanel>
 				  <StackPanel Spacing="5">
 					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Foreground="#FF082635"/>
-					  <TextBlock Text="First Name" FontSize="18"/>
+					  <TextBlock Text="First Name" FontSize="20"/>
 				  </StackPanel>
-				  
 			  </StackPanel>
 		  </Border>
 
-		  <Button Content="Create new patient" Foreground="White" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" HorizontalAlignment="Center" Width="695.24" Height="76" Margin="0,230,0,0"/>
-		  <Button Content="See full list of patients" Foreground="White" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" HorizontalAlignment="Center" Width="695.24" Height="76" Margin="0,420,0,0"/>
+		  <Button Content="Create new patient"
+				  Foreground="White" FontWeight="Bold"
+				  FontSize="40"
+				  HorizontalContentAlignment="Center"
+				  VerticalContentAlignment="Center"
+				  Classes="MainButtonAnimation"
+				  HorizontalAlignment="Center"
+				  Width="695.24"
+				  Height="76"
+				  Margin="0,230,0,0"
+				  Click="CreateNewPatientButton_Click"/>
+		  
+		  <Button Content="See full list of patients" 
+				  Click="PatientListButton_Click"
+				  Foreground="White"
+				  FontWeight="Bold" 
+				  FontSize="40"
+				  HorizontalContentAlignment="Center" 
+				  VerticalContentAlignment="Center"
+				  Classes="MainButtonAnimation" 
+				  HorizontalAlignment="Center"
+				  Width="695.24" 
+				  Height="76" 
+				  Margin="0,420,0,0"/>
 	  </Grid>
-	  
+
+	  <!--Left Side Menu-->
 	  <Border
 		BorderThickness="0"
 		CornerRadius="3"
@@ -78,15 +118,36 @@
 				  <GradientStop Color="#FF3DC6E1" Offset="0.0" />
 				  <GradientStop Color="#FF90E0EF" Offset="1.0" />
 			  </LinearGradientBrush>
-		  </Border.Background>
-		  <Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-500,0,0" BorderBrush="#FF0397C9" BorderThickness="3">
+		  </Border.Background> 
+		  <Grid>
+		  <Border Width="60"
+				  Height="60"
+				  Background="White"
+				  CornerRadius="100"
+				  Margin="0,-500,0,0"
+				  BorderBrush="#FF0397C9"
+				  BorderThickness="3">
 			  <Image>
 				  
 			  </Image>
 		  </Border>
+			  <!--Settings icon-->
+		  <Button Width="40"
+                Height="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,20"
+                Background="Transparent"
+                BorderBrush="Transparent">
+            <Image Source="/Assets/Images/settingsIcon.png"
+                   Width="40"
+                   Height="40"
+                   Stretch="Uniform" />
+        </Button>
+		  </Grid>
 	  </Border>
 	  
-	  
+	  <!--Close and Minimise buttons-->
 	  <Button x:Name="CloseButton"
 				Content="X"
 				Padding="8 3"
@@ -100,6 +161,7 @@
 				Click="CloseButton_Click"
 				Classes="CloseButtonAnimation" />
 	  <Button Content="-"
+			  FontWeight="Bold"
 			  Padding="10 3"
 			  Width="28"
 			  Height="28"
@@ -110,5 +172,16 @@
 			  Foreground="#FF082635"
 			  FontSize="16"
 			  Click="MinimizeButton_Click"/>
+
+
+
+
+	  <Border Name="DraggableArea"
+			 Height="50"
+			 Width="800"
+			 VerticalAlignment="Top"
+			 HorizontalAlignment="Left"
+			 Background="Transparent"
+			 Cursor="Hand"/>
   </Grid>
 </Window>

@@ -41,6 +41,7 @@
     <AvaloniaXaml Include="Styles\ButtonStyles.axaml" />
     <AvaloniaXaml Include="Styles\CloseButton.axaml" />
     <AvaloniaXaml Include="Styles\ImagesButton.axaml" />
+	  <AvaloniaXaml Include="Styles\ToggleButtonStyle.axaml" />
   </ItemGroup>
 
   <!-- Embedded Font Resources -->

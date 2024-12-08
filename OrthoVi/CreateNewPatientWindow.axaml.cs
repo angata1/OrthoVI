@@ -7,9 +7,9 @@ using System;
 
 namespace OrthoVi;
 
-public partial class HomePageWindow : Window
+public partial class CreateNewPatientWindow : Window
 {
-    public HomePageWindow()
+    public CreateNewPatientWindow()
     {
         InitializeComponent();
 #if DEBUG
@@ -36,17 +36,10 @@ public partial class HomePageWindow : Window
         // Minimize the window
         this.WindowState = WindowState.Minimized;
     }
-
-    private void CreateNewPatientButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void BackButton_Click(object sender, RoutedEventArgs e)
     {
-       CreateNewPatientWindow cnpw = new CreateNewPatientWindow();
-        cnpw.Show();
-        this.Hide();
-    }
-    private void PatientListButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        PatientListWindow plw = new PatientListWindow();
-        plw.Show();
+        HomePageWindow homeWindow = new HomePageWindow();
+        homeWindow.Show();
         this.Hide();
     }
 }

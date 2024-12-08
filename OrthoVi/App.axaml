@@ -11,6 +11,7 @@
 		<StyleInclude Source="/Styles/ButtonStyles.axaml" />
 		<StyleInclude Source="/Styles/CloseButton.axaml" />
 		<StyleInclude Source="/Styles/ImagesButton.axaml" />
+		<StyleInclude Source="/Styles/ToggleButtonStyle.axaml" />
 		
 	</Application.Styles>
 

@@ -21,13 +21,6 @@
 	
 	
 	<Grid>
-
-		<Border Name="DraggableArea"
-			   Height="50"
-			   VerticalAlignment="Top"
-			   Background="Transparent"
-			   Cursor="Hand"/>
-		
 		
 		<!-- Log In -->
 		<Border
@@ -73,11 +66,11 @@
 				</LinearGradientBrush>
 			</Border.Background>
 			<Canvas>
-				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
+				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
 				<TextBox Width="327" Height="30" Canvas.Left="26" Canvas.Top="80" Background="#FFE8F9FC" BorderThickness="0" />
-				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="144" />
+				<TextBlock Text="Password"  FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="144" />
 				<TextBox Width="327" Height="30" Canvas.Left="26" Canvas.Top="203" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*"/>
-				<Button Content="Log In" Width="212" Height="70" FontSize="36" Foreground="White" Canvas.Left="90" Canvas.Top="280" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" Click="LogInButton_Click">
+				<Button Content="Log In" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" FontSize="36" Foreground="White" Canvas.Left="90" Canvas.Top="280" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" Click="LogInButton_Click">
 				</Button>
 
 			</Canvas>
@@ -92,18 +85,18 @@
 				</LinearGradientBrush>
 			</Border.Background>
 			<Canvas>
-				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
+				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
 				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="85" Background="#FFE8F9FC" BorderThickness="0" />
-				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontWeight="Bold" Canvas.Left="26" Canvas.Top="149" />
+				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="149" />
 				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="208" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*"/>
-				<Button Content="Sign Up" Width="212" Height="70" Canvas.Left="90" Canvas.Top="285" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation">
+				<Button Content="Sign Up" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" Canvas.Left="90" Canvas.Top="285" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation">
 				</Button>
 			</Canvas>
 		</Border>
 
 		<!-- Labels and Buttons -->
-		<TextBlock Text="Log In" HorizontalAlignment="Left" Margin="27,44,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontWeight="Bold" />
-		<TextBlock Text="Sign Up" HorizontalAlignment="Right" Margin="0,44,27,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontWeight="Bold" />
+		<TextBlock Text="Log In" HorizontalAlignment="Left" Margin="27,44,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold"/>
+		<TextBlock Text="Sign Up" HorizontalAlignment="Right" Margin="0,44,27,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" />
 		<Border CornerRadius="3"></Border>
 		<Button x:Name="CloseButton"
 				Content="X"
@@ -118,7 +111,8 @@
 				Click="CloseButton_Click"
 				Classes="CloseButtonAnimation" />
 		<Button Content="-"
-				Padding="10 3"
+				VerticalContentAlignment="Center"
+				HorizontalContentAlignment="Center"
 				Width="28"
 				Height="28"
 				HorizontalAlignment="Right"
@@ -128,6 +122,23 @@
 				Foreground="#FF082635"
 				FontSize="16"
 		        Click="MinimizeButton_Click"/>
-		<TextBlock Text="Welcome" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FF082635" FontWeight="Bold" />
+		<TextBlock Text="Welcome"
+				   HorizontalAlignment="Center"
+				   Margin="0,8,0,0" 
+				   VerticalAlignment="Top"
+				   FontSize="65"
+				   Foreground="#FF082635" 
+				   FontFamily="{StaticResource KoHoFont}" 
+				   FontWeight="Bold"/>
+		
+		
+		
+		<Border Name="DraggableArea"
+			 Height="50"
+			 Width="800"
+			 VerticalAlignment="Top"
+			 HorizontalAlignment="Left"
+			 Background="Transparent"
+			 Cursor="Hand"/>
 	</Grid>
 </Window>

@@ -42,6 +42,7 @@ namespace OrthoVi
         {
             HomePageWindow homeWindow = new HomePageWindow();
             homeWindow.Show();
+            this.Hide();
         }
     }
 }
