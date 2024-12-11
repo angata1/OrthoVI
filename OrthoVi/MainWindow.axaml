@@ -67,9 +67,9 @@
 			</Border.Background>
 			<Canvas>
 				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
-				<TextBox Width="327" Height="30" Canvas.Left="26" Canvas.Top="80" Background="#FFE8F9FC" BorderThickness="0" />
+				<TextBox Width="327" Height="35" Canvas.Left="26" Canvas.Top="80" Background="#FFE8F9FC" BorderThickness="0"  FontSize="20"/>
 				<TextBlock Text="Password"  FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="144" />
-				<TextBox Width="327" Height="30" Canvas.Left="26" Canvas.Top="203" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*"/>
+				<TextBox Width="327" Height="35" Canvas.Left="26" Canvas.Top="203" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*" FontSize="20"/>
 				<Button Content="Log In" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" FontSize="36" Foreground="White" Canvas.Left="90" Canvas.Top="280" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" Click="LogInButton_Click">
 				</Button>
 
@@ -86,9 +86,9 @@
 			</Border.Background>
 			<Canvas>
 				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
-				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="85" Background="#FFE8F9FC" BorderThickness="0" />
+				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="85" Background="#FFE8F9FC" BorderThickness="0" FontSize="20"/>
 				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="149" />
-				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="208" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*"/>
+				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="208" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*" FontSize="20"/>
 				<Button Content="Sign Up" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" Canvas.Left="90" Canvas.Top="285" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation">
 				</Button>
 			</Canvas>
@@ -122,9 +122,9 @@
 				Foreground="#FF082635"
 				FontSize="16"
 		        Click="MinimizeButton_Click"/>
-		<TextBlock Text="Welcome"
+		<TextBlock Text="WELCOME"
 				   HorizontalAlignment="Center"
-				   Margin="0,15,0,0" 
+				   Margin="-15,25,0,0" 
 				   VerticalAlignment="Top"
 				   FontSize="60"
 				   Foreground="#FF082635" 
