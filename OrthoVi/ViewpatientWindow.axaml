@@ -123,14 +123,6 @@
 				</StackPanel>
 				</Border>
 
-			<!--Delete Button-->
-		
-
-
-
-
-
-
 			<!--Patient Images-->
 			<Border BoxShadow="-0 5 10 0 LightGray"
 				 Width="360"
