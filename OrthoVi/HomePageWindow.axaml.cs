@@ -49,4 +49,10 @@ public partial class HomePageWindow : Window
         plw.Show();
         this.Hide();
     }
+    private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
+    {
+        ViewpatientWindow vpw = new ViewpatientWindow();
+        vpw.Show();
+        this.Hide();
+    }
 }

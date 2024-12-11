@@ -24,6 +24,7 @@
 		<!-- Style for all TextBlocks -->
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+			<Setter Property="Foreground" Value="#FF082635"/>
 		</Style>
 
 		<!-- Style for Buttons -->
@@ -34,9 +35,20 @@
 		<!-- Style for TextBoxes -->
 		<Style Selector="TextBox">
 			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+			<Setter Property="Background" Value="#FFE8F9FC"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Foreground" Value="#FF082635"/>
+		</Style>
+		<Style Selector="TextBox:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="BorderBrush" Value="Transparent" />
 		</Style>
 	</Window.Styles>
   
+	
+	
+	
+	
   <Grid>
 
 	  <!--Main Container-->
@@ -62,26 +74,26 @@
 			  
 			  <StackPanel Orientation="Horizontal" Spacing="45" HorizontalAlignment="Center">
 				  <StackPanel Spacing="5"> 
-					<Button Classes="ImageButtonAnimation" Width="116" Height="108"/>
-					  <TextBlock Text="First Name" FontSize="20" Foreground="#FF082635"/>
-				  </StackPanel>
-				  <StackPanel Spacing="5">
-					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Foreground="#FF082635"/>
+					<Button Classes="ImageButtonAnimation" Width="116" Height="108" Click="ViewPatientButton_Click"/>
 					  <TextBlock Text="First Name" FontSize="20"/>
 				  </StackPanel>
 				  <StackPanel Spacing="5">
-					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Foreground="#FF082635"/>
+					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Click="ViewPatientButton_Click"/>
 					  <TextBlock Text="First Name" FontSize="20"/>
 				  </StackPanel>
 				  <StackPanel Spacing="5">
-					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Foreground="#FF082635"/>
+					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Click="ViewPatientButton_Click"/>
+					  <TextBlock Text="First Name" FontSize="20"/>
+				  </StackPanel>
+				  <StackPanel Spacing="5">
+					  <Button Classes="ImageButtonAnimation" Width="116" Height="108" Click="ViewPatientButton_Click"/>
 					  <TextBlock Text="First Name" FontSize="20"/>
 				  </StackPanel>
 			  </StackPanel>
 		  </Border>
 
 		  <Button Content="Create new patient"
-				  Foreground="White" FontWeight="Bold"
+				  Foreground="White"
 				  FontSize="40"
 				  HorizontalContentAlignment="Center"
 				  VerticalContentAlignment="Center"
@@ -95,7 +107,7 @@
 		  <Button Content="See full list of patients" 
 				  Click="PatientListButton_Click"
 				  Foreground="White"
-				  FontWeight="Bold" 
+				 
 				  FontSize="40"
 				  HorizontalContentAlignment="Center" 
 				  VerticalContentAlignment="Center"
@@ -120,17 +132,24 @@
 			  </LinearGradientBrush>
 		  </Border.Background> 
 		  <Grid>
-		  <Border Width="60"
-				  Height="60"
-				  Background="White"
-				  CornerRadius="100"
-				  Margin="0,-500,0,0"
-				  BorderBrush="#FF0397C9"
-				  BorderThickness="3">
-			  <Image>
-				  
-			  </Image>
-		  </Border>
+			  <!--Account icon-->
+			  <Border Width="60"
+					  Height="60"
+					  Background="White"
+					  CornerRadius="100"
+					  Margin="0,-500,0,0"
+					  BorderBrush="#FF0397C9"
+					  BorderThickness="3"
+					  ClipToBounds="True">
+
+				  <Image Source="/Assets/Images/personIcon.png"
+						 Margin="0,20,0,0"
+						 Width="70"
+						 Height="70"
+						 Stretch="Uniform"
+						   />
+			  </Border>
+			  
 			  <!--Settings icon-->
 		  <Button Width="40"
                 Height="40"

@@ -16,7 +16,7 @@
 	</Application.Styles>
 
 	<Application.Resources>
-		<FontFamily x:Key="KoHoFont">avares://OrthoVi/Assets/Fonts#KoHo</FontFamily>
+		<FontFamily x:Key="KoHoFont">avares://OrthoVi/Assets/Fonts#Livvic</FontFamily>
 	</Application.Resources>
 	
 </Application>

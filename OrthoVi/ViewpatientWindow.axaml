@@ -43,6 +43,44 @@
 		<Style Selector="TextBox:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="BorderBrush" Value="Transparent" />
 		</Style>
+
+		<!-- Style for Delete button -->
+		<Style Selector="Button.DeleteButtonAnimation">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Background">
+				<Setter.Value>
+					<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+						<GradientStops>
+							<GradientStop Offset="0.0" Color="#FFE96365" />
+							<GradientStop Offset="1.0" Color="#FFA2393A" />
+						</GradientStops>
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="CornerRadius" Value="10" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.2" />
+					<BrushTransition Property="Background" Duration="0:0:0.5" />
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<Style Selector="Button.DeleteButtonAnimation:pointerover">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Background" Value="#FFA2393A" />
+			<Setter Property="CornerRadius" Value="30" />
+		</Style>
+
+		<Style Selector="Button.DeleteButtonAnimation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="TextBlock.Foreground" Value="White"/>
+			<Setter Property="TextBlock.Background" Value="#FFA2393A" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="TextBlock.Background" Duration="0:0:0.5" />
+				</Transitions>
+			</Setter>
+		</Style>
 	</Window.Styles>
 
 
@@ -64,6 +102,122 @@
 					   FontSize="30"
 					   Foreground="#FF082635"
 					   Margin="30,105,0,0"/>
+
+
+			<!--Buttons Analysis-->
+			<Border BoxShadow="-0 5 10 0 LightGray"
+				 Width="364" Height="220"
+				 Margin="35,85,0,0"
+				 Padding="13"
+				 HorizontalAlignment="Left"
+				 CornerRadius="25">
+				<Border.Background>
+					<LinearGradientBrush  StartPoint="50%,0%" EndPoint="50%,100%">
+						<GradientStop Color="#FFB2F3FF" Offset="0.0" />
+						<GradientStop Color="#FF90E0EF" Offset="1.0" />
+					</LinearGradientBrush>
+				</Border.Background>
+				<StackPanel Spacing="25" VerticalAlignment="Center" HorizontalAlignment="Center">
+					<Button Content="NEW ANALYSIS" FontSize="32" FontWeight="Bold" Width="313" Height="76" Classes="MainButtonAnimation" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+					<Button Content="DELETE PATIENT" FontSize="32" FontWeight="Bold" Width="313" Height="76" Margin="0,0,0,0" Classes="DeleteButtonAnimation" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				</StackPanel>
+				</Border>
+
+			<!--Delete Button-->
+		
+
+
+
+
+
+
+			<!--Patient Images-->
+			<Border BoxShadow="-0 5 10 0 LightGray"
+				 Width="360"
+				 Height="433"
+				 Margin="415,100,0,0"
+				 Padding="13"
+				 HorizontalAlignment="Left"
+				 CornerRadius="25">
+				<Border.Background>
+					<LinearGradientBrush  StartPoint="50%,0%" EndPoint="50%,100%">
+						<GradientStop Color="#FFB2F3FF" Offset="0.0" />
+						<GradientStop Color="#FF90E0EF" Offset="1.0" />
+					</LinearGradientBrush>
+				</Border.Background>
+
+				<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+					<!--Row 1-->
+					<!--Row of Images-->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+						<!--Cell of Image with Title-->
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="LATERAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="CEPH" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="PA CEPH" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="ORTHOPAN" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="FRONTAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+					</StackPanel>
+					<!--Row 2-->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="SMILE" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="ANGLE" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="LATERAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="RIGHT" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="INTRAORAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+					</StackPanel>
+					<!--Row 3-->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="FRONT" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="INTRAORAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="LEFT" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="INTRAORAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="UPPER" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="OCCLUSAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Vertical" Spacing="3">
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<TextBlock Text="LOWER" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+							<TextBlock Text="OCCLUSAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</Border>
 		</Grid>
 		
 		
@@ -83,8 +237,14 @@
 
 			<Grid>
 				<!--Account icon-->
-				<Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-500,0,0" BorderBrush="#FF0397C9" BorderThickness="3">
-					<Image/>
+				<Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-500,0,0" BorderBrush="#FF0397C9" BorderThickness="3"  ClipToBounds="True">
+					
+					<Image Source="/Assets/Images/personIcon.png"
+						   Margin="0,20,0,0"
+						   Width="70"
+						   Height="70"
+						   Stretch="Uniform"
+						   />
 				</Border>
 
 				<!--Home icon-->

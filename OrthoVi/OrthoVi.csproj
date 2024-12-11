@@ -10,18 +10,18 @@
 
   <!-- Remove conflicting "None" entries -->
   <ItemGroup>
-    <None Remove="Assets\Fonts\KoHo-Bold.ttf" />
-    <None Remove="Assets\Fonts\KoHo-BoldItalic.ttf" />
-    <None Remove="Assets\Fonts\KoHo-ExtraLight.ttf" />
-    <None Remove="Assets\Fonts\KoHo-ExtraLightItalic.ttf" />
-    <None Remove="Assets\Fonts\KoHo-Italic.ttf" />
-    <None Remove="Assets\Fonts\KoHo-Light.ttf" />
-    <None Remove="Assets\Fonts\KoHo-LightItalic.ttf" />
-    <None Remove="Assets\Fonts\KoHo-Medium.ttf" />
-    <None Remove="Assets\Fonts\KoHo-MediumItalic.ttf" />
-    <None Remove="Assets\Fonts\KoHo-Regular.ttf" />
-    <None Remove="Assets\Fonts\KoHo-SemiBold.ttf" />
-    <None Remove="Assets\Fonts\KoHo-SemiBoldItalic.ttf" />
+    <None Remove="Assets\Fonts\Livvic-Bold.ttf" />
+    <None Remove="Assets\Fonts\Livvic-BoldItalic.ttf" />
+    <None Remove="Assets\Fonts\Livvic-ExtraLight.ttf" />
+    <None Remove="Assets\Fonts\Livvic-ExtraLightItalic.ttf" />
+    <None Remove="Assets\Fonts\Livvic-Italic.ttf" />
+    <None Remove="Assets\Fonts\Livvic-Light.ttf" />
+    <None Remove="Assets\Fonts\Livvic-LightItalic.ttf" />
+    <None Remove="Assets\Fonts\Livvic-Medium.ttf" />
+    <None Remove="Assets\Fonts\Livvic-MediumItalic.ttf" />
+    <None Remove="Assets\Fonts\Livvic-Regular.ttf" />
+    <None Remove="Assets\Fonts\Livvic-SemiBold.ttf" />
+    <None Remove="Assets\Fonts\Livvic-SemiBoldItalic.ttf" />
   </ItemGroup>
 
   <ItemGroup>

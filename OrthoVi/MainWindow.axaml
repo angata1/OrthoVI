@@ -124,9 +124,9 @@
 		        Click="MinimizeButton_Click"/>
 		<TextBlock Text="Welcome"
 				   HorizontalAlignment="Center"
-				   Margin="0,8,0,0" 
+				   Margin="0,15,0,0" 
 				   VerticalAlignment="Top"
-				   FontSize="65"
+				   FontSize="60"
 				   Foreground="#FF082635" 
 				   FontFamily="{StaticResource KoHoFont}" 
 				   FontWeight="Bold"/>

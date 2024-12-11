@@ -45,6 +45,8 @@
 		</Style>
 	</Window.Styles>
 
+	
+	
 
 	<Grid>
 		<!--Main Container-->
@@ -74,7 +76,7 @@
 				<ScrollViewer>
 					<StackPanel Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
 
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center">
+						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
 							<StackPanel Orientation="Horizontal" Spacing="50">
 								<Border Width="81" Height="81" Background="#FF00B4D8">
 									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
@@ -86,7 +88,7 @@
 							</StackPanel>
 						</Button>
 
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center">
+						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
 						<StackPanel Orientation="Horizontal" Spacing="50">
 							<Border Width="81" Height="81" Background="#FF00B4D8">
 								<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
@@ -98,7 +100,7 @@
 						</StackPanel>
 						</Button>
 
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center">
+						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
 							<StackPanel Orientation="Horizontal" Spacing="50">
 								<Border Width="81" Height="81" Background="#FF00B4D8">
 									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
@@ -109,7 +111,7 @@
 								</StackPanel>
 							</StackPanel>
 						</Button>
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center">
+						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
 							<StackPanel Orientation="Horizontal" Spacing="50">
 								<Border Width="81" Height="81" Background="#FF00B4D8">
 									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
@@ -121,7 +123,7 @@
 							</StackPanel>
 						</Button>
 						
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center">
+						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
 							<StackPanel Orientation="Horizontal" Spacing="50">
 								<Border Width="81" Height="81" Background="#FF00B4D8">
 									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
@@ -157,8 +159,21 @@
 
 			<Grid>
 				<!--Account icon-->
-				<Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-500,0,0" BorderBrush="#FF0397C9" BorderThickness="3">
-					<Image/>
+				<Border Width="60"
+						Height="60"
+						Background="White"
+						CornerRadius="100"
+						Margin="0,-500,0,0"
+						BorderBrush="#FF0397C9"
+						BorderThickness="3" 
+						ClipToBounds="True">
+
+					<Image Source="/Assets/Images/personIcon.png"
+						   Margin="0,20,0,0"
+						   Width="70"
+						   Height="70"
+						   Stretch="Uniform"
+						   />
 				</Border>
 
 				<!--Home icon-->

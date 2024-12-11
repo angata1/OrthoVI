@@ -42,4 +42,10 @@ public partial class PatientListWindow : Window
         homeWindow.Show();
         this.Hide();
     }
+    private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
+    {
+        ViewpatientWindow vpw = new ViewpatientWindow();
+        vpw.Show();
+        this.Hide();
+    }
 }
