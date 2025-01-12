@@ -118,7 +118,7 @@
 					</LinearGradientBrush>
 				</Border.Background>
 				<StackPanel Spacing="25" VerticalAlignment="Center" HorizontalAlignment="Center">
-					<Button Content="NEW ANALYSIS" FontSize="32" FontWeight="Bold" Width="313" Height="76" Classes="MainButtonAnimation" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+					<Button Content="NEW ANALYSIS" FontSize="32" FontWeight="Bold" Width="313" Height="76" Classes="MainButtonAnimation" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Click="CephStepsWindow_Click"/>
 					<Button Content="DELETE PATIENT" FontSize="32" FontWeight="Bold" Width="313" Height="76" Margin="0,0,0,0" Classes="DeleteButtonAnimation" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 				</StackPanel>
 				</Border>

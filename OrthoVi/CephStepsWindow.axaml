@@ -1,0 +1,205 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="OrthoVi.CephStepsWindow"
+        Title="CephStepsWindow"
+		WindowStartupLocation="CenterScreen"
+        Width="900"
+        Height="590"
+        CanResize="False"
+		ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaToDecorationsHint="True"
+        SystemDecorations="BorderOnly">
+	<Window.Background>
+		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
+			<GradientStop Color="#FFE8F9FC" Offset="1.0" />
+		</LinearGradientBrush>
+	</Window.Background>
+
+	<Window.Styles>
+		<!-- Style for all TextBlocks -->
+		<Style Selector="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+			<Setter Property="Foreground" Value="#FF082635"/>
+		</Style>
+
+		<!-- Style for Buttons -->
+		<Style Selector="Button">
+			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+		</Style>
+
+		<!-- Style for TextBoxes -->
+		<Style Selector="TextBox">
+			<Setter Property="FontFamily" Value="{StaticResource KoHoFont}"/>
+			<Setter Property="Background" Value="#FFE8F9FC"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Foreground" Value="#FF082635"/>
+		</Style>
+		<Style Selector="TextBox:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="BorderBrush" Value="Transparent" />
+		</Style>
+	</Window.Styles>
+
+
+
+
+	<Grid>
+		<!--Main Container-->
+		<Grid Background="Transparent" Width="807"
+		   HorizontalAlignment="Right">
+
+			<TextBlock Text="PATIENTS"
+					   FontWeight="Bold"
+					   FontSize="58"
+					   Foreground="#FF082635"
+					   Margin="30,41,0,0"/>
+
+
+			<Border BoxShadow="-0 5 10 0 LightGray"
+				 Width="749" Height="300"
+				 Margin="30,100,0,0"
+				 Padding="15"
+				 HorizontalAlignment="Left"
+				 CornerRadius="25">
+				<Border.Background>
+					<LinearGradientBrush  StartPoint="50%,0%" EndPoint="50%,100%">
+						<GradientStop Color="#FFB2F3FF" Offset="0.0" />
+						<GradientStop Color="#FF90E0EF" Offset="1.0" />
+					</LinearGradientBrush>
+				</Border.Background>
+
+				<StackPanel Orientation="Vertical" Spacing="25" VerticalAlignment="Center">
+					<Button Content="STEP 1: LANDMARKS"
+							FontSize="32"
+							FontWeight="Bold"
+							Width="700"
+							Height="100"
+							Classes="MainButtonAnimation"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							HorizontalAlignment="Center"
+							Click="LandmarksButton_Click"
+							/>
+					<Button Content="STEP 1: ANALYSIS"
+							FontSize="32"
+							FontWeight="Bold"
+							Width="700"
+							Height="100"
+							Classes="MainButtonAnimation"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							HorizontalAlignment="Center"
+							/>
+				</StackPanel>
+				
+			</Border>
+
+
+		</Grid>
+
+		<!--Left Side Menu-->
+		<Border
+		  BorderThickness="0"
+		  CornerRadius="3"
+		  BoxShadow="5 0 45 0 LightGray"
+		  HorizontalAlignment="Left"
+		  Height="590" VerticalAlignment="Center" Width="93">
+			<Border.Background>
+				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+					<GradientStop Color="#FF3DC6E1" Offset="0.0" />
+					<GradientStop Color="#FF90E0EF" Offset="1.0" />
+				</LinearGradientBrush>
+			</Border.Background>
+
+			<Grid>
+				<!--Account icon-->
+				<Border Width="60"
+						Height="60"
+						Background="White"
+						CornerRadius="100"
+						Margin="0,-500,0,0"
+						BorderBrush="#FF0397C9"
+						BorderThickness="3"
+						ClipToBounds="True">
+
+					<Image Source="/Assets/Images/personIcon.png"
+						   Margin="0,20,0,0"
+						   Width="70"
+						   Height="70"
+						   Stretch="Uniform"
+						   />
+				</Border>
+
+				<!--Home icon-->
+				<Button Width="40"
+					  Height="40"
+					  HorizontalAlignment="Center"
+					  VerticalAlignment="Bottom"
+					  Margin="0,0,0,450"
+					  Background="Transparent"
+					  BorderBrush="Transparent"
+					   Click="BackButton_Click">
+					<Image Source="/Assets/Images/homeIcon.png"
+						   Width="40"
+						   Height="40"
+						   Stretch="Uniform" />
+				</Button>
+
+				<!--Settings icon-->
+				<Button Width="40"
+					  Height="40"
+					  HorizontalAlignment="Center"
+					  VerticalAlignment="Bottom"
+					  Margin="0,0,0,20"
+					  Background="Transparent"
+					  BorderBrush="Transparent">
+					<Image Source="/Assets/Images/settingsIcon.png"
+						   Width="40"
+						   Height="40"
+						   Stretch="Uniform" />
+				</Button>
+
+			</Grid>
+		</Border>
+
+		<!--Close and Minimise buttons-->
+		<Button x:Name="CloseButton"
+				   Content="X"
+				   Padding="8 3"
+				   Width="28"
+				   Height="28"
+				   HorizontalAlignment="Right"
+				   Margin="10"
+				   VerticalAlignment="Top"
+				   Foreground="White"
+				   FontSize="16"
+				   Click="CloseButton_Click"
+				   Classes="CloseButtonAnimation" />
+		<Button Content="-"
+				FontWeight="Bold"
+				Padding="10 3"
+				Width="28"
+				Height="28"
+				HorizontalAlignment="Right"
+				Margin="0,10,50,0"
+				VerticalAlignment="Top"
+				Background="#FFBAF4FF"
+				Foreground="#FF082635"
+				FontSize="16"
+				Click="MinimizeButton_Click"/>
+
+		<Border Name="DraggableArea"
+			 Height="50"
+			 Width="800"
+			 VerticalAlignment="Top"
+			 HorizontalAlignment="Left"
+			 Background="Transparent"
+			 Cursor="Hand"/>
+
+	</Grid>
+</Window>

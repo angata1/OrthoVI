@@ -7,9 +7,9 @@ using System;
 
 namespace OrthoVi;
 
-public partial class ViewpatientWindow : Window
+public partial class CephStepsWindow : Window
 {
-    public ViewpatientWindow()
+    public CephStepsWindow()
     {
         InitializeComponent();
 #if DEBUG
@@ -42,10 +42,10 @@ public partial class ViewpatientWindow : Window
         homeWindow.Show();
         this.Hide();
     }
-    private void CephStepsWindow_Click(object sender, RoutedEventArgs e)
+    private void LandmarksButton_Click(object sender, RoutedEventArgs e)
     {
-        CephStepsWindow cph = new CephStepsWindow();
-        cph.Show();
+        LandmarksWindow lnd = new LandmarksWindow();
+        lnd.Show();
         this.Hide();
     }
 }
