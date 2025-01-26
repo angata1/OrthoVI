@@ -67,9 +67,9 @@
 			</Border.Background>
 			<Canvas>
 				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
-				<TextBox Width="327" Height="35" Canvas.Left="26" Canvas.Top="80" Background="#FFE8F9FC" BorderThickness="0"  FontSize="20"/>
+				<TextBox x:Name="UsernameLogInTextBox" Width="327" Height="35" Canvas.Left="26" Canvas.Top="80" Background="#FFE8F9FC" BorderThickness="0"  FontSize="20"/>
 				<TextBlock Text="Password"  FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="144" />
-				<TextBox Width="327" Height="35" Canvas.Left="26" Canvas.Top="203" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*" FontSize="20"/>
+				<TextBox x:Name="PasswordLogInTextBox" Width="327" Height="35" Canvas.Left="26" Canvas.Top="203" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*" FontSize="20"/>
 				<Button Content="Log In" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" FontSize="36" Foreground="White" Canvas.Left="90" Canvas.Top="280" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" Click="LogInButton_Click">
 				</Button>
 
@@ -84,15 +84,28 @@
 					<GradientStop Color="#FF90E0EF" Offset="1.0" />
 				</LinearGradientBrush>
 			</Border.Background>
-			<Canvas>
-				<TextBlock Text="Name" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="26" />
-				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="85" Background="#FFE8F9FC" BorderThickness="0" FontSize="20"/>
-				<TextBlock Text="Password" FontSize="36" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Canvas.Left="26" Canvas.Top="149" />
-				<TextBox Width="328" Height="30" Canvas.Left="26" Canvas.Top="208" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*" FontSize="20"/>
-				<Button Content="Sign Up" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" Canvas.Left="90" Canvas.Top="285" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation">
-				</Button>
-			</Canvas>
+			<StackPanel Spacing="5" Margin="26">
+				<TextBlock Text="Username" FontSize="24" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" />
+				<TextBox x:Name="UsernameTextBox" Width="328" Height="40" Background="#FFE8F9FC" BorderThickness="0" FontSize="20"/>
+
+				<TextBlock Text="Password" FontSize="24" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" />
+				<TextBox x:Name="PasswordTextBox" Width="328" Height="40" Background="#FFE8F9FC" BorderThickness="0" PasswordChar="*" FontSize="20"/>
+				
+				<StackPanel Orientation="Horizontal" Spacing="6">
+					<StackPanel>
+						<TextBlock Text="First name" FontSize="24" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" />
+						<TextBox x:Name="FistNameTextBox" Width="164" Height="40" Background="#FFE8F9FC" BorderThickness="0" FontSize="20"/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Text="Last name" FontSize="24" Foreground="#FF082635" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" />
+						<TextBox x:Name="LastNameTextBox" Width="164" Height="40" Background="#FFE8F9FC" BorderThickness="0" FontSize="20"/>
+					</StackPanel>
+				</StackPanel>
+
+				<Button Content="Sign Up" Click="SignUpButton_Click" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold" Width="212" Height="70" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Classes="MainButtonAnimation" Margin="58,20,0,0"/>
+			</StackPanel>
 		</Border>
+
 
 		<!-- Labels and Buttons -->
 		<TextBlock Text="Log In" HorizontalAlignment="Left" Margin="27,44,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" FontFamily="{StaticResource KoHoFont}" FontWeight="Bold"/>
