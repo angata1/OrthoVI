@@ -12,7 +12,8 @@
 		ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
-        SystemDecorations="BorderOnly">
+        SystemDecorations="BorderOnly"
+		Loaded="Window_Loaded">
 	<Window.Background>
 		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
@@ -54,7 +55,7 @@
 	  <!--Main Container-->
 	  <Grid Background="Transparent" Width="807" HorizontalAlignment="Right">
 		  
-		<TextBlock Text="WELCOME, DR. NAME" FontWeight="Bold"  FontSize="58" Foreground="#FF082635"  Margin="30,41,0,0"/>
+		<TextBlock x:Name="WelcomeHeaderTextBlock" Text="Default Text" FontWeight="Bold"  FontSize="58" Foreground="#FF082635"  Margin="30,41,0,0"/>
 		<TextBlock Text="LAST PATIENTS" FontSize="24" FontWeight="Bold" Foreground="#FF082635"  Margin="45,142,0,0"/>
 		  <!--Container for Last Patients-->
 		  <Border BoxShadow="-0 5 10 0 LightGray"

@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System;
+using static OrthoVi.MainWindow;
 
 namespace OrthoVi;
 
@@ -17,7 +18,27 @@ public partial class HomePageWindow : Window
 #endif
         var draggableArea = this.FindControl<Border>("DraggableArea");
         draggableArea.PointerPressed += DraggableArea_PointerPressed;
+
     }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        SetWelcomingHeader();
+    }
+
+    private void SetWelcomingHeader()
+    {
+        if (SessionManager.LoggedInUser?.DoctorInformation != null)
+        {
+            string header = $"WELCOME, DR. {SessionManager.LoggedInUser.DoctorInformation.Lastname.ToUpper()}";
+            WelcomeHeaderTextBlock.Text = header;
+        }
+        else
+        {
+            WelcomeHeaderTextBlock.Text = "WELCOME!";
+        }
+    }
+
     private void DraggableArea_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
@@ -55,4 +76,5 @@ public partial class HomePageWindow : Window
         vpw.Show();
         this.Hide();
     }
+
 }

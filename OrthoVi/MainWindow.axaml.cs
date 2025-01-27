@@ -41,6 +41,13 @@ namespace OrthoVi
                 BeginMoveDrag(e);
             }
         }
+
+        public static class SessionManager
+        {
+            public static User LoggedInUser { get; set; }
+        }
+
+
         private async void LogInButton_Click(object sender, RoutedEventArgs e)
         {
             var dbManager = new DatabaseManager();
@@ -51,8 +58,10 @@ namespace OrthoVi
                 var user = dbManager.ReadDatabase(logInUsername, logInPassword);
                 if (user != null)
                 {
+                    SessionManager.LoggedInUser = user;
+
                     // Show the message box dialog
-                     var box = MessageBoxManager
+                    var box = MessageBoxManager
                     .GetMessageBoxStandard("Log In Successful", "You successfully logged in your account!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
 
                      var result = await box.ShowWindowAsync();
