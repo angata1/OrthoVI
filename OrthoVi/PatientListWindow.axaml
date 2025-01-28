@@ -82,8 +82,8 @@
 									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
 								</Border>
 								<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
-									<TextBlock Text="AGE - GENDER" FontSize="25"/>
+									<TextBlock x:Name="PatientFullNameTB" Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
+									<TextBlock x:Name="PatientAgeAndGenderTB" Text="AGE - GENDER" FontSize="25"/>
 								</StackPanel>
 							</StackPanel>
 						</Button>

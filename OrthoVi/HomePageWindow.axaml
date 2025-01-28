@@ -73,7 +73,7 @@
 					  </LinearGradientBrush>
 				  </Border.Background>
 			  
-			  <StackPanel Orientation="Horizontal" Spacing="45" HorizontalAlignment="Center">
+			  <StackPanel x:Name="MainStackPanel" Orientation="Horizontal" Spacing="45" HorizontalAlignment="Center">
 				  <StackPanel Spacing="5"> 
 					<Button Classes="ImageButtonAnimation" Width="116" Height="108" Click="ViewPatientButton_Click">
 						<Image Source="/Assets/Images/imageIcon.png"/>

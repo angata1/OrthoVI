@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System;
+using static OrthoVi.MainWindow;
 
 namespace OrthoVi;
 
@@ -47,5 +48,27 @@ public partial class PatientListWindow : Window
         ViewpatientWindow vpw = new ViewpatientWindow();
         vpw.Show();
         this.Hide();
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        SetPatientInformaton();
+    }
+
+    private void SetPatientInformaton()
+    {
+        DatabaseManager dbManager = new DatabaseManager();
+        var client = dbManager.GetClientById(SessionManager.LoggedInUser.Username, 1);
+        if (client != null)
+        {
+            string header = $"Client Name: {client.ClientFirstName}";
+            PatientFullNameTB.Text = header;
+        }
+        else
+        {
+             
+            PatientFullNameTB.Text = $"Client not found";
+        }
+
     }
 }

@@ -48,6 +48,24 @@ public class DatabaseManager
         }
     }
 
+    public void AddNewClient(string username, ClientInformation newClient)
+    {
+        string databaseFile = $"{mainPath}{username}.db";
+        if (!File.Exists(databaseFile))
+        {
+            throw new FileNotFoundException("Database file not found.");
+        }
+
+        using (var context = new UserDbContext(databaseFile))
+        {
+            // Add the new client to the database
+            context.ClientInformations.Add(newClient);
+            context.SaveChanges();
+            Console.WriteLine($"New client '{newClient.ClientFirstName} {newClient.ClientLastName}' added successfully.");
+        }
+    }
+
+
     public User ReadDatabase(string username, string password)
     {
         string databaseFile = $"{mainPath}{username}.db";
@@ -75,6 +93,21 @@ public class DatabaseManager
             return user;
         }
     }
+
+    public ClientInformation GetClientById(string username, int clientId)
+    {
+        string databaseFile = $"{DatabaseManager.mainPath}{username}.db";
+        if (!File.Exists(databaseFile))
+        {
+            throw new FileNotFoundException("Database file not found.");
+        }
+
+        using (var context = new UserDbContext(databaseFile))
+        {
+            return context.ClientInformations.FirstOrDefault(c => c.ClientInformationId == clientId);
+        }
+    }
+
 
     public void UpdateDatabase(string username, User user)
     {
