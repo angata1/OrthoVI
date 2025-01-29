@@ -52,23 +52,29 @@ public partial class PatientListWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        SetPatientInformaton();
+        SetPatientInformation();
     }
 
-    private void SetPatientInformaton()
+    private void SetPatientInformation()
     {
-        DatabaseManager dbManager = new DatabaseManager();
-        var client = dbManager.GetClientById(SessionManager.LoggedInUser.Username, 1);
-        if (client != null)
+        var projectHistory = SessionManager.LoggedInUser?.DoctorInformation?.ProjectHistory;
+        if (projectHistory != null )
         {
-            string header = $"Client Name: {client.ClientFirstName}";
-            PatientFullNameTB.Text = header;
+            var client = projectHistory[0]?.Client;
+            if (client != null)
+            {
+                string patientFullName = $"{client.ClientFirstName} {client.ClientMiddleName} {client.ClientLastName}";
+                PatientFullNameTB.Text = patientFullName;
+            }
+            else
+            {
+                PatientFullNameTB.Text = "Client information not available";
+            }
         }
         else
         {
-             
-            PatientFullNameTB.Text = $"Client not found";
+            PatientFullNameTB.Text = "Client not found";
         }
-
     }
+
 }

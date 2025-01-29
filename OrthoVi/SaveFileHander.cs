@@ -191,6 +191,7 @@ public class ClientInformation
 {
     public int ClientInformationId { get; set; }
     public string ClientFirstName { get; set; }
+    public string ClientMiddleName { get; set; }
     public string ClientLastName { get; set; }
     public string Gender { get; set; }
     public int ClientAge { get; set; }

@@ -72,6 +72,7 @@ public partial class CreateNewPatientWindow : Window
             ClientInformation newClient = new ClientInformation
             {
                 ClientFirstName = patientFirstName,
+                ClientMiddleName = patientMiddleName,
                 ClientLastName = patientLastName,
                 Gender = patientGender,
                 ClientAge = patientAge
