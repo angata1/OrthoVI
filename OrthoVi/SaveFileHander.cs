@@ -94,20 +94,6 @@ public class DatabaseManager
         }
     }
 
-    public ClientInformation GetClientById(string username, int clientId)
-    {
-        string databaseFile = $"{DatabaseManager.mainPath}{username}.db";
-        if (!File.Exists(databaseFile))
-        {
-            throw new FileNotFoundException("Database file not found.");
-        }
-
-        using (var context = new UserDbContext(databaseFile))
-        {
-            return context.ClientInformations.FirstOrDefault(c => c.ClientInformationId == clientId);
-        }
-    }
-
 
     public void UpdateDatabase(string username, User user)
     {
