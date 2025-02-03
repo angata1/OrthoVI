@@ -8,6 +8,7 @@ using MsBox.Avalonia;
 using System;
 using static OrthoVi.MainWindow;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace OrthoVi;
 
@@ -68,28 +69,34 @@ public partial class CreateNewPatientWindow : Window
                 return;
             }
 
-            // Create the new ClientInformation object
-            ClientInformation newClient = new ClientInformation
-            {
-                ClientFirstName = patientFirstName,
-                ClientMiddleName = patientMiddleName,
-                ClientLastName = patientLastName,
-                Gender = patientGender,
-                ClientAge = patientAge
-            };
-
-            // Call the database manager to add the new client
             DatabaseManager dbManager = new DatabaseManager();
-            await Task.Run(() =>
-            {
-                dbManager.AddNewClient(SessionManager.LoggedInUser.Username, newClient);
-            });
 
-            // Notify the user
-            var box2 = MessageBoxManager
+            if (SessionManager.LoggedInUser != null)
+            {
+                // Create and add a new client
+                ClientInformation newClient = new ClientInformation
+                {
+                    ClientFirstName = patientFirstName,
+                    ClientMiddleName = patientMiddleName,
+                    ClientLastName = patientLastName,
+                    Gender = patientGender,
+                    ClientAge = patientAge,
+                    Image = new List<Image>()
+                };
+
+                SessionManager.LoggedInUser.DoctorInformation.Clients.Add(newClient);
+                dbManager.UpdateDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser);
+
+
+                // Notify the user
+                var box2 = MessageBoxManager
                 .GetMessageBoxStandard("Creation Successful", "Patient was created!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
 
-            var result2 = await box2.ShowWindowAsync();
+                var result2 = await box2.ShowWindowAsync();
+            }
+
+            
+           
         }
         catch (Exception ex)
         {

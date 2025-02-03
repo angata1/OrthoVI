@@ -2,7 +2,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using System;
 using static OrthoVi.MainWindow;
 
@@ -52,28 +54,135 @@ public partial class PatientListWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        SetPatientInformation();
+        CreateButton();
     }
 
-    private void SetPatientInformation()
+    private void CreateButton()
     {
-        var projectHistory = SessionManager.LoggedInUser?.DoctorInformation?.ProjectHistory;
-        if (projectHistory != null )
+        if (SessionManager.LoggedInUser != null && SessionManager.LoggedInUser.DoctorInformation.Clients.Count > 0)
         {
-            var client = projectHistory[0]?.Client;
+            for (int i = 0; i < SessionManager.LoggedInUser.DoctorInformation.Clients.Count; i++)
+            {
+                // Create Button
+                var button = new Button
+                {
+                    Width = 740,
+                    Background = Brushes.Transparent,
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center
+                };
+
+                button.Click += ViewPatientButton_Click;
+
+                // Create main StackPanel (horizontal layout)
+                var mainStackPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 50
+                };
+
+                // Create Border containing Image
+                var imageBorder = new Border
+                {
+                    Width = 81,
+                    Height = 81,
+                    Background = new SolidColorBrush(Color.Parse("#FF00B4D8"))
+                };
+
+                var image = new Avalonia.Controls.Image
+                {
+                    Stretch = Avalonia.Media.Stretch.Uniform,
+                    Width = 65
+                };
+
+                imageBorder.Child = image;
+
+                // Create Vertical StackPanel for TextBlocks
+                var textStackPanel = new StackPanel
+                {
+                    Orientation = Orientation.Vertical,
+                    VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
+                };
+
+                var patientFullNameTB1 = new TextBlock
+                {
+                    Name = "PatientFullNameTB1",
+                    Text = SetPatientInformation_Name(i),
+                    FontSize = 25,
+                    FontWeight = FontWeight.Bold
+                };
+
+                var patientAgeAndGenderTB1 = new TextBlock
+                {
+                    Name = "PatientAgeAndGenderTB1",
+                    Text = SetPatientInformation_AgeGender(i),
+                    FontSize = 25
+                };
+
+                PatientsListStackPanel.Children.Add(button);
+
+                // Add TextBlocks to textStackPanel
+                textStackPanel.Children.Add(patientFullNameTB1);
+                textStackPanel.Children.Add(patientAgeAndGenderTB1);
+
+                // Add Border and textStackPanel to mainStackPanel
+                mainStackPanel.Children.Add(imageBorder);
+                mainStackPanel.Children.Add(textStackPanel);
+
+                // Set StackPanel as Button's content
+                button.Content = mainStackPanel;
+            }
+        }
+        
+    }
+
+    
+    private string SetPatientInformation_Name(int i)
+    {   
+        string patientFullName= "";
+
+        if (SessionManager.LoggedInUser != null && SessionManager.LoggedInUser.DoctorInformation.Clients.Count > 0)
+        {
+
+            var client = SessionManager.LoggedInUser.DoctorInformation.Clients[i];
+            
             if (client != null)
             {
-                string patientFullName = $"{client.ClientFirstName} {client.ClientMiddleName} {client.ClientLastName}";
-                PatientFullNameTB.Text = patientFullName;
+                return patientFullName = $"{client.ClientFirstName} {client.ClientMiddleName} {client.ClientLastName}";
+               
             }
             else
             {
-                PatientFullNameTB.Text = "Client information not available";
+                return patientFullName = "Client information not available";
             }
         }
         else
         {
-            PatientFullNameTB.Text = "Client not found";
+            return patientFullName = "Client not found";
+        }
+    }
+
+    private string SetPatientInformation_AgeGender(int i)
+    {
+        string patientFullName = "";
+
+        if (SessionManager.LoggedInUser != null && SessionManager.LoggedInUser.DoctorInformation.Clients.Count > 0)
+        {
+
+            var client = SessionManager.LoggedInUser.DoctorInformation.Clients[i];
+
+            if (client != null)
+            {
+                return patientFullName = $"{client.ClientAge} - {client.Gender}";
+
+            }
+            else
+            {
+                return patientFullName = "Client information not available";
+            }
+        }
+        else
+        {
+            return patientFullName = "Client not found";
         }
     }
 

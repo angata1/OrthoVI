@@ -9,17 +9,15 @@ public class DatabaseManager
 {
     public static string mainPath = "./SaveFiles/";
 
-    public DatabaseManager() {
-        if (Directory.Exists(mainPath))
+    public DatabaseManager()
+    {
+        if (!Directory.Exists(mainPath))
         {
-
-        }
-        else {
-        Directory.CreateDirectory(mainPath);
+            Directory.CreateDirectory(mainPath);
         }
     }
 
-    public void CreateDatabase(string username, string password, string DoctorFirstName, string DoctorLastName, byte[] profilePicture)
+    public void CreateDatabase(string username, string password, string doctorFirstName, string doctorLastName, byte[] profilePicture)
     {
         string databaseFile = $"{mainPath}{username}.db";
         if (File.Exists(databaseFile))
@@ -37,34 +35,16 @@ public class DatabaseManager
                 Password = password,
                 DoctorInformation = new DoctorInformation
                 {
-                    Firstname = DoctorFirstName,
-                    Lastname = DoctorLastName,
+                    Firstname = doctorFirstName,
+                    Lastname = doctorLastName,
                     ProfilePicture = Convert.ToBase64String(profilePicture),
-                    ProjectHistory = new List<Project>()
+                    Clients = new List<ClientInformation>()
                 }
             };
             context.Users.Add(user);
             context.SaveChanges();
         }
     }
-
-    public void AddNewClient(string username, ClientInformation newClient)
-    {
-        string databaseFile = $"{mainPath}{username}.db";
-        if (!File.Exists(databaseFile))
-        {
-            throw new FileNotFoundException("Database file not found.");
-        }
-
-        using (var context = new UserDbContext(databaseFile))
-        {
-            // Add the new client to the database
-            context.ClientInformations.Add(newClient);
-            context.SaveChanges();
-            Console.WriteLine($"New client '{newClient.ClientFirstName} {newClient.ClientLastName}' added successfully.");
-        }
-    }
-
 
     public User ReadDatabase(string username, string password)
     {
@@ -77,8 +57,7 @@ public class DatabaseManager
         using (var context = new UserDbContext(databaseFile))
         {
             var user = context.Users.Include(u => u.DoctorInformation)
-                                     .ThenInclude(d => d.ProjectHistory)
-                                     .ThenInclude(p => p.Client)
+                                     .ThenInclude(d => d.Clients)
                                      .ThenInclude(c => c.Image)
                                      .ThenInclude(i => i.Annotation)
                                      .ThenInclude(a => a.Coordinates)
@@ -89,11 +68,9 @@ public class DatabaseManager
                 Console.WriteLine("Incorrect username or password");
                 return null;
             }
-
             return user;
         }
     }
-
 
     public void UpdateDatabase(string username, User user)
     {
@@ -110,22 +87,41 @@ public class DatabaseManager
         }
     }
 
-    public (string Username, string Password) GetUserCredentials(string username)
+    public void DeleteClient(string username, string password, int clientId)
     {
         string databaseFile = $"{mainPath}{username}.db";
         if (!File.Exists(databaseFile))
         {
-            throw new FileNotFoundException("Database file not found.");
+            Console.WriteLine("Database file not found.");
+            return;
         }
 
         using (var context = new UserDbContext(databaseFile))
         {
-            var user = context.Users.FirstOrDefault();
-            if (user == null) throw new Exception("User not found in the database.");
+            var user = context.Users.Include(u => u.DoctorInformation)
+                                    .ThenInclude(d => d.Clients)
+                                    .FirstOrDefault(u => u.Username == username && u.Password == password);
 
-            return (user.Username, user.Password);
+            if (user == null || user.DoctorInformation == null)
+            {
+                Console.WriteLine("User or doctor information not found.");
+                return;
+            }
+
+            var clientToRemove = user.DoctorInformation.Clients.FirstOrDefault(c => c.ClientInformationId == clientId);
+            if (clientToRemove != null)
+            {
+                context.ClientInformations.Remove(clientToRemove);
+                context.SaveChanges();
+                Console.WriteLine($"Client {clientId} deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Client not found.");
+            }
         }
     }
+
 }
 
 // DbContext and Entity Models
@@ -140,7 +136,6 @@ public class UserDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<DoctorInformation> DoctorInformations { get; set; }
-    public DbSet<Project> Projects { get; set; }
     public DbSet<ClientInformation> ClientInformations { get; set; }
     public DbSet<Image> Images { get; set; }
     public DbSet<ImageAnnotation> ImageAnnotations { get; set; }
@@ -155,7 +150,6 @@ public class UserDbContext : DbContext
     {
         modelBuilder.Entity<User>().HasKey(u => u.Username);
         modelBuilder.Entity<DoctorInformation>().HasKey(d => d.DoctorInformationId);
-        modelBuilder.Entity<Project>().HasKey(p => p.ProjectId);
         modelBuilder.Entity<ClientInformation>().HasKey(c => c.ClientInformationId);
         modelBuilder.Entity<Image>().HasKey(i => i.ImageId);
         modelBuilder.Entity<ImageAnnotation>().HasKey(ia => ia.ImageAnnotationId);
@@ -177,14 +171,7 @@ public class DoctorInformation
     public string Firstname { get; set; }
     public string Lastname { get; set; }
     public string ProfilePicture { get; set; }
-    public List<Project> ProjectHistory { get; set; }
-}
-
-public class Project
-{
-    public int ProjectId { get; set; }
-    public int? ClientInformationId { get; set; }
-    public ClientInformation Client { get; set; }
+    public List<ClientInformation> Clients { get; set; }
 }
 
 public class ClientInformation

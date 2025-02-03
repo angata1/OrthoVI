@@ -75,72 +75,13 @@
 				</Border.Background>
 
 				<ScrollViewer>
-					<StackPanel Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
+					<StackPanel x:Name="PatientsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
 
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
-							<StackPanel Orientation="Horizontal" Spacing="50">
-								<Border Width="81" Height="81" Background="#FF00B4D8">
-									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
-								</Border>
-								<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock x:Name="PatientFullNameTB" Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
-									<TextBlock x:Name="PatientAgeAndGenderTB" Text="AGE - GENDER" FontSize="25"/>
-								</StackPanel>
-							</StackPanel>
-						</Button>
 
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
-						<StackPanel Orientation="Horizontal" Spacing="50">
-							<Border Width="81" Height="81" Background="#FF00B4D8">
-								<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
-							</Border>
-							<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-								<TextBlock Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
-								<TextBlock Text="AGE - GENDER" FontSize="25"/>
-							</StackPanel>
-						</StackPanel>
-						</Button>
-
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
-							<StackPanel Orientation="Horizontal" Spacing="50">
-								<Border Width="81" Height="81" Background="#FF00B4D8">
-									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
-								</Border>
-								<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
-									<TextBlock Text="AGE - GENDER" FontSize="25"/>
-								</StackPanel>
-							</StackPanel>
-						</Button>
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
-							<StackPanel Orientation="Horizontal" Spacing="50">
-								<Border Width="81" Height="81" Background="#FF00B4D8">
-									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
-								</Border>
-								<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
-									<TextBlock Text="AGE - GENDER" FontSize="25"/>
-								</StackPanel>
-							</StackPanel>
-						</Button>
-						
-						<Button Width="740" Background="Transparent" HorizontalAlignment="Center" Click="ViewPatientButton_Click">
-							<StackPanel Orientation="Horizontal" Spacing="50">
-								<Border Width="81" Height="81" Background="#FF00B4D8">
-									<Image Source="/Assets/Images/imageIcon.png" Stretch="Uniform" Width="65"/>
-								</Border>
-								<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock Text="FULL NAME" FontSize="25" FontWeight="Bold"/>
-									<TextBlock Text="AGE - GENDER" FontSize="25"/>
-								</StackPanel>
-							</StackPanel>
-						</Button>
-					
 					</StackPanel>
 				</ScrollViewer>
-				
+
 			</Border>
-			
 			
 		</Grid>
 
