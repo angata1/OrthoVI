@@ -12,7 +12,8 @@
 		ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
-        SystemDecorations="BorderOnly">
+        SystemDecorations="BorderOnly" 
+		Loaded="Window_Loaded">
 	<Window.Background>
 		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
@@ -92,13 +93,14 @@
 		<Grid Background="Transparent" Width="807"
 		   HorizontalAlignment="Right">
 
-			<TextBlock Text="FIRST MIDDLE LAST NAME"
+			<TextBlock x:Name="PatientNameTB"
+					   Text="FIRST MIDDLE LAST NAME"
 					   FontWeight="Bold"
 					   FontSize="46"
 					   Foreground="#FF082635"
 					   Margin="30,41,0,0"/>
-			<TextBlock Text="AGE - GENDER"
-					   
+			<TextBlock x:Name="PatientAgeGenderTB"
+					   Text="AGE - GENDER"
 					   FontSize="30"
 					   Foreground="#FF082635"
 					   Margin="30,105,0,0"/>
