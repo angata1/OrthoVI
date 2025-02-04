@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System;
+using static OrthoVi.MainWindow;
 
 namespace OrthoVi;
 
@@ -47,5 +48,23 @@ public partial class ViewpatientWindow : Window
         CephStepsWindow cph = new CephStepsWindow();
         cph.Show();
         this.Hide();
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        SetPatientInfo();
+    }
+
+    private void SetPatientInfo()
+    {
+        if (SessionManager.LoggedInUser?.DoctorInformation != null)
+        {
+            PatientListWindow patientListWindow = new PatientListWindow();
+            int number = patientListWindow.clientNumber;
+            string patientName = patientListWindow.SetPatientInformation_Name(number);
+            string patientAgeGender = patientListWindow.SetPatientInformation_AgeGender(number);
+            PatientNameTB.Text= patientName;
+            PatientAgeGenderTB.Text= patientAgeGender;
+        }
     }
 }
