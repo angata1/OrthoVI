@@ -21,6 +21,7 @@ public partial class PatientListWindow : Window
         var draggableArea = this.FindControl<Border>("DraggableArea");
         draggableArea.PointerPressed += DraggableArea_PointerPressed;
     }
+
     private void DraggableArea_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
@@ -29,6 +30,7 @@ public partial class PatientListWindow : Window
             BeginMoveDrag(e);
         }
     }
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Environment.Exit(0);
@@ -39,12 +41,14 @@ public partial class PatientListWindow : Window
         // Minimize the window
         this.WindowState = WindowState.Minimized;
     }
+
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
         HomePageWindow homeWindow = new HomePageWindow();
         homeWindow.Show();
         this.Hide();
     }
+
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
     {
         ViewpatientWindow vpw = new ViewpatientWindow();
@@ -52,10 +56,13 @@ public partial class PatientListWindow : Window
         this.Hide();
     }
 
+
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         CreateButton();
     }
+
+    public int clientNumber;
 
     private void CreateButton()
     {
@@ -63,6 +70,7 @@ public partial class PatientListWindow : Window
         {
             for (int i = 0; i < SessionManager.LoggedInUser.DoctorInformation.Clients.Count; i++)
             {
+                clientNumber = i;
                 // Create Button
                 var button = new Button
                 {
@@ -136,7 +144,7 @@ public partial class PatientListWindow : Window
     }
 
     
-    private string SetPatientInformation_Name(int i)
+    public string SetPatientInformation_Name(int i)
     {   
         string patientFullName= "";
 
@@ -161,7 +169,7 @@ public partial class PatientListWindow : Window
         }
     }
 
-    private string SetPatientInformation_AgeGender(int i)
+    public string SetPatientInformation_AgeGender(int i)
     {
         string patientFullName = "";
 
