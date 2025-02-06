@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using System;
 using static OrthoVi.MainWindow;
@@ -14,6 +15,7 @@ public partial class HomePageWindow : Window
     public HomePageWindow()
     {
         InitializeComponent();
+
 #if DEBUG
         this.AttachDevTools();
 #endif
@@ -55,72 +57,56 @@ public partial class HomePageWindow : Window
 
     private void CreateRecentPatientsButtons()
     {
-        int j;
-        if (SessionManager.LoggedInUser != null && SessionManager.LoggedInUser.DoctorInformation.Clients.Count > 0)
+        if (SessionManager.LoggedInUser == null ||
+            SessionManager.LoggedInUser.DoctorInformation.Clients.Count == 0)
         {
-            switch (SessionManager.LoggedInUser.DoctorInformation.Clients.Count)
-            {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                    j = SessionManager.LoggedInUser.DoctorInformation.Clients.Count; 
-                    break;
-
-                case 4:
-                default:
-                    j = 4;
-                    break;
-            }
+            return; 
         }
-        else { j = 0; }
 
-        for (int i = 0; i < j; i++) 
+        int totalClients = SessionManager.LoggedInUser.DoctorInformation.Clients.Count;
+
+        int startIndex = Math.Max(0, totalClients - 4);
+
+        for (int i = totalClients - 1; i >= startIndex; i--)
         {
-            // Create StackPanel
+            int clientIndex = i;
             var stackPanel = new StackPanel
             {
                 Spacing = 5
             };
 
-            // Create Button
             var button = new Button
             {
                 Width = 116,
-                Height = 108
+                Height = 108,
+                Tag = clientIndex
             };
 
             button.Classes.Add("ImageButtonAnimation");
 
-            // Attach Click Event
             button.Click += ViewPatientButton_Click;
 
-            // Create Image
             var image = new Avalonia.Controls.Image
             {
-               
                 Stretch = Avalonia.Media.Stretch.Uniform
             };
 
-            // Set Image as Button Content
             button.Content = image;
 
-            // Create TextBlock
             var textBlock = new TextBlock
             {
                 Text = SetPatientInformation_Name(i),
+                TextAlignment = TextAlignment.Center,
                 FontSize = 20
             };
 
-            // Add Button and TextBlock to StackPanel
             stackPanel.Children.Add(button);
             stackPanel.Children.Add(textBlock);
 
-            // Add StackPanel to Parent Container (example: a Grid or another Panel)
             MainStackPanel.Children.Add(stackPanel);
-
         }
     }
+
 
     private void SetWelcomingHeader()
     {
@@ -168,9 +154,13 @@ public partial class HomePageWindow : Window
     }
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
     {
-        ViewpatientWindow vpw = new ViewpatientWindow();
-        vpw.Show();
-        this.Hide();
+        if (sender is Button btn && btn.Tag is int clientIndex)
+        {
+            ViewpatientWindow vpw = new ViewpatientWindow();
+            vpw.ClientIndexTextBlock.Text = $"{clientIndex}";
+            vpw.Show();
+            this.Hide();
+        }
     }
 
 }

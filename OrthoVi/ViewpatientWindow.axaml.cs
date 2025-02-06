@@ -3,6 +3,8 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using MsBox.Avalonia.Enums;
+using MsBox.Avalonia;
 using System;
 using static OrthoVi.MainWindow;
 
@@ -39,7 +41,9 @@ public partial class ViewpatientWindow : Window
     }
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
-        HomePageWindow homeWindow = new HomePageWindow();
+        HomePageWindow homeWindow = new HomePageWindow(); 
+        homeWindow.InvalidateMeasure();
+        homeWindow.InvalidateVisual();
         homeWindow.Show();
         this.Hide();
     }
@@ -55,14 +59,39 @@ public partial class ViewpatientWindow : Window
         SetPatientInfo();
     }
 
+    private async void DeletePatientButton_Click(object sender, RoutedEventArgs e)
+    {
+        var dbManager = new DatabaseManager();
+        int clientIndex = int.Parse(ClientIndexTextBlock.Text);
+        SessionManager.LoggedInUser = dbManager.ReadDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password);
+        var clientToDelete = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex];
+
+        if (clientToDelete != null)
+        {
+            dbManager.DeleteClient(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password, clientToDelete.ClientInformationId);
+            
+            var box = MessageBoxManager
+                    .GetMessageBoxStandard("Deletion Successful", "You successfully deleted the patient!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
+
+            var result = await box.ShowWindowAsync();
+        }
+        else
+        {
+            var box = MessageBoxManager
+                   .GetMessageBoxStandard("Error", "Patient not found", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+
+            var result = await box.ShowWindowAsync();
+        }
+    }
+
     private void SetPatientInfo()
     {
         if (SessionManager.LoggedInUser?.DoctorInformation != null)
         {
             PatientListWindow patientListWindow = new PatientListWindow();
-            int number = patientListWindow.clientNumber;
-            string patientName = patientListWindow.SetPatientInformation_Name(number);
-            string patientAgeGender = patientListWindow.SetPatientInformation_AgeGender(number);
+            int clientIndex =int.Parse(ClientIndexTextBlock.Text);
+            string patientName = patientListWindow.SetPatientInformation_Name(clientIndex);
+            string patientAgeGender = patientListWindow.SetPatientInformation_AgeGender(clientIndex);
             PatientNameTB.Text= patientName;
             PatientAgeGenderTB.Text= patientAgeGender;
         }

@@ -51,9 +51,13 @@ public partial class PatientListWindow : Window
 
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
     {
-        ViewpatientWindow vpw = new ViewpatientWindow();
-        vpw.Show();
-        this.Hide();
+        if (sender is Button btn && btn.Tag is int clientIndex)
+        { 
+            ViewpatientWindow vpw = new ViewpatientWindow();
+            vpw.ClientIndexTextBlock.Text = $"{clientIndex}";
+            vpw.Show();
+            this.Hide();
+        }
     }
 
 
@@ -62,33 +66,35 @@ public partial class PatientListWindow : Window
         CreateButton();
     }
 
-    public int clientNumber;
 
     private void CreateButton()
     {
-        if (SessionManager.LoggedInUser != null && SessionManager.LoggedInUser.DoctorInformation.Clients.Count > 0)
+        if (SessionManager.LoggedInUser != null &&
+            SessionManager.LoggedInUser.DoctorInformation.Clients.Count > 0)
         {
             for (int i = 0; i < SessionManager.LoggedInUser.DoctorInformation.Clients.Count; i++)
             {
-                clientNumber = i;
-                // Create Button
+                // Capture the current index
+                int clientIndex = i;
+
+                // Create Button and store the index in its Tag property.
                 var button = new Button
                 {
                     Width = 740,
                     Background = Brushes.Transparent,
-                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                    Tag = clientIndex
                 };
 
                 button.Click += ViewPatientButton_Click;
 
-                // Create main StackPanel (horizontal layout)
+                // Create and set up the rest of your UI elements (StackPanels, Borders, etc.)
                 var mainStackPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     Spacing = 50
                 };
 
-                // Create Border containing Image
                 var imageBorder = new Border
                 {
                     Width = 81,
@@ -104,7 +110,6 @@ public partial class PatientListWindow : Window
 
                 imageBorder.Child = image;
 
-                // Create Vertical StackPanel for TextBlocks
                 var textStackPanel = new StackPanel
                 {
                     Orientation = Orientation.Vertical,
@@ -114,7 +119,7 @@ public partial class PatientListWindow : Window
                 var patientFullNameTB1 = new TextBlock
                 {
                     Name = "PatientFullNameTB1",
-                    Text = SetPatientInformation_Name(i),
+                    Text = SetPatientInformation_Name(clientIndex),
                     FontSize = 25,
                     FontWeight = FontWeight.Bold
                 };
@@ -122,28 +127,24 @@ public partial class PatientListWindow : Window
                 var patientAgeAndGenderTB1 = new TextBlock
                 {
                     Name = "PatientAgeAndGenderTB1",
-                    Text = SetPatientInformation_AgeGender(i),
+                    Text = SetPatientInformation_AgeGender(clientIndex),
                     FontSize = 25
                 };
 
-                PatientsListStackPanel.Children.Add(button);
-
-                // Add TextBlocks to textStackPanel
                 textStackPanel.Children.Add(patientFullNameTB1);
                 textStackPanel.Children.Add(patientAgeAndGenderTB1);
 
-                // Add Border and textStackPanel to mainStackPanel
                 mainStackPanel.Children.Add(imageBorder);
                 mainStackPanel.Children.Add(textStackPanel);
 
-                // Set StackPanel as Button's content
                 button.Content = mainStackPanel;
+                PatientsListStackPanel.Children.Add(button);
             }
         }
-        
     }
 
-    
+
+
     public string SetPatientInformation_Name(int i)
     {   
         string patientFullName= "";
