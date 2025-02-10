@@ -9,6 +9,9 @@ using System;
 using static OrthoVi.MainWindow;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.IO;
+using Avalonia.Platform.Storage;
+using System.Net;
 
 namespace OrthoVi;
 
@@ -48,7 +51,7 @@ public partial class CreateNewPatientWindow : Window
         this.Hide();
     }
 
-    private async void CreatePatientButton_Click(object sender, RoutedEventArgs e)
+    public async void CreatePatientButton_Click(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -81,7 +84,7 @@ public partial class CreateNewPatientWindow : Window
                     ClientLastName = patientLastName,
                     Gender = patientGender,
                     ClientAge = patientAge,
-                    Image = new List<Image>()
+                    Image = images
                 };
 
                 SessionManager.LoggedInUser.DoctorInformation.Clients.Add(newClient);
@@ -106,6 +109,74 @@ public partial class CreateNewPatientWindow : Window
 
             var result3 = await box3.ShowWindowAsync();
 
+        }
+    }
+
+    public List<Image> images { get; set; }
+
+    public async Task<Image> AddImageAsync(Button sourceButton)
+    {
+        // Get the top-level control (typically the Window) from the button.
+        var topLevel = TopLevel.GetTopLevel(sourceButton);
+        if (topLevel == null)
+            throw new InvalidOperationException("Unable to determine top-level window.");
+
+        // Set up file picker options.
+        var filePickerOptions = new FilePickerOpenOptions
+        {
+            Title = "Select Patient Image",
+            AllowMultiple = false,
+            FileTypeFilter = new[] { FilePickerFileTypes.ImageJpg, FilePickerFileTypes.ImagePng }
+        };
+
+        // Open the file picker dialog.
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(filePickerOptions);
+        if (files == null || files.Count == 0)
+            throw new OperationCanceledException("No file was selected.");
+
+        // Get the first selected file's local path.
+        string filePath = files[0].TryGetLocalPath();
+        if (string.IsNullOrWhiteSpace(filePath))
+            throw new InvalidOperationException("Could not retrieve a valid file path.");
+
+        // Read the file into a byte array.
+        byte[] imageBytes = await Task.Run(() => File.ReadAllBytes(filePath));
+
+        // Use the x:Name of the button as the image name.
+        string imageName = sourceButton.Name;
+
+        // Create a new Image object (using your provided definition).
+        var newImage = new Image
+        {
+            // ImageId is assumed to be set by the database or ORM later.
+            ImageName = imageName,
+            ImageContent = imageBytes,
+            Annotation = new List<ImageAnnotation>()
+        };
+
+        // Add the new image to the public images list.
+        images.Add(newImage);
+
+        // (Optional) If later you assign the client's image list and then want to empty this list,
+        // you can do so after this method returns.
+        return newImage;
+    }
+
+    private async void OnAddImageButtonClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Cast sender to Button.
+            var button = sender as Button;
+            if (button == null)
+                return;
+
+            Image addedImage = await AddImageAsync(button);
+            // Further processing can be done with addedImage.
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions (e.g., show a message box).
         }
     }
 

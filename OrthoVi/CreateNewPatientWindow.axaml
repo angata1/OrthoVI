@@ -146,7 +146,7 @@
 				  <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
 					  <!--Cell of Image with Title-->
 					  <StackPanel Orientation="Vertical" Spacing="3">
-						  <Button Width="76" Height="76" Classes="ImageButtonAnimation">
+						  <Button x:Name="Lateral-Ceph" Click="OnAddImageButtonClick" Width="76" Height="76" Classes="ImageButtonAnimation">
 							  <Image Source="/Assets/Images/imageIcon.png"/>
 						  </Button>
 						  <TextBlock Text="LATERAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
