@@ -5,7 +5,9 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using System;
+using System.IO;
 using static OrthoVi.MainWindow;
 
 namespace OrthoVi;
@@ -102,13 +104,28 @@ public partial class PatientListWindow : Window
                     Background = new SolidColorBrush(Color.Parse("#FF00B4D8"))
                 };
 
-                var image = new Avalonia.Controls.Image
+                Bitmap bitmap = null;
+                var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Image;
+
+                if (clientImages != null && clientImages.Count > 3 && clientImages[3] != null)
                 {
+                    // Load the client's image from the stored image bytes.
+                    var clientImage = clientImages[3];
+                    using (var stream = new MemoryStream(clientImage.ImageContent))
+                    {
+                        bitmap = new Bitmap(stream);
+                    }
+                }
+
+                // Create the Avalonia Image control.
+                var imageControl = new Avalonia.Controls.Image
+                {
+                    Source = bitmap,
                     Stretch = Avalonia.Media.Stretch.Uniform,
-                    Width = 65
+                    Width = 65,
                 };
 
-                imageBorder.Child = image;
+                imageBorder.Child = imageControl;
 
                 var textStackPanel = new StackPanel
                 {

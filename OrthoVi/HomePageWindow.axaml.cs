@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using System;
+using System.IO;
 using static OrthoVi.MainWindow;
 
 namespace OrthoVi;
@@ -86,8 +87,22 @@ public partial class HomePageWindow : Window
 
             button.Click += ViewPatientButton_Click;
 
+            Bitmap bitmap = null;
+            var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Image;
+
+            if (clientImages != null && clientImages.Count > 3 && clientImages[3] != null)
+            {
+                // Load the client's image from the stored image bytes.
+                var clientImage = clientImages[3];
+                using (var stream = new MemoryStream(clientImage.ImageContent))
+                {
+                    bitmap = new Bitmap(stream);
+                }
+            }
+
             var image = new Avalonia.Controls.Image
             {
+                Source=bitmap,
                 Stretch = Avalonia.Media.Stretch.Uniform
             };
 

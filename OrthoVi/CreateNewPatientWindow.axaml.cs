@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using Avalonia.Platform.Storage;
 using System.Net;
+using Avalonia.Media.Imaging;
 
 namespace OrthoVi;
 
@@ -51,24 +52,43 @@ public partial class CreateNewPatientWindow : Window
         this.Hide();
     }
 
+    private List<ImageData> images = new List<ImageData>();
+
     public async void CreatePatientButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (!(images.Count == 12))
+        {
+            var box2 = MessageBoxManager
+                    .GetMessageBoxStandard("Important!", "There are missing images!" + " Are you sure you want to continue?", ButtonEnum.YesNo, MsBox.Avalonia.Enums.Icon.Question);
+            var result = await box2.ShowWindowAsync();
+
+            if (result == ButtonResult.Yes)
+            {
+                CreatePatient();
+            }
+        }
+        else
+        {
+            CreatePatient();
+        }
+    }
+
+    public async void CreatePatient()
     {
         try
         {
-            // Retrieve user input
             string patientFirstName = PatientFirstNameTextBox.Text.Trim();
-            string patientMiddleName = PatientMiddleNameTextBox.Text.Trim(); // Unused, include if necessary
+            string patientMiddleName = PatientMiddleNameTextBox.Text.Trim();
             string patientLastName = PatientLastNameTextBox.Text.Trim();
             int patientAge = int.Parse(PatientAgeTextBox.Text.Trim());
             string patientGender = PatientFemaleToggle.IsChecked == true ? "Female" : "Male";
 
-            // Validate inputs (optional but recommended)
             if (string.IsNullOrEmpty(patientFirstName) || string.IsNullOrEmpty(patientLastName))
             {
                 var box1 = MessageBoxManager
-               .GetMessageBoxStandard("Input Error", "First and Last Name are required.", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+                   .GetMessageBoxStandard("Input Error", "First and Last Name are required.", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
 
-                var result1 = await box1.ShowWindowAsync();
+                await box1.ShowWindowAsync();
                 return;
             }
 
@@ -76,7 +96,6 @@ public partial class CreateNewPatientWindow : Window
 
             if (SessionManager.LoggedInUser != null)
             {
-                // Create and add a new client
                 ClientInformation newClient = new ClientInformation
                 {
                     ClientFirstName = patientFirstName,
@@ -84,100 +103,127 @@ public partial class CreateNewPatientWindow : Window
                     ClientLastName = patientLastName,
                     Gender = patientGender,
                     ClientAge = patientAge,
-                    Image = images
+
+                    // Convert List<ImageData> to List<Image>
+                    Image = images.ConvertAll(img => new Image
+                    {
+                        ImageName = img.ImageName,
+                        ImageContent = img.ImageContent,
+                        Annotation = new List<ImageAnnotation>() // Initialize empty list if needed
+                    })
                 };
 
                 SessionManager.LoggedInUser.DoctorInformation.Clients.Add(newClient);
                 dbManager.UpdateDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser);
 
-
-                // Notify the user
                 var box2 = MessageBoxManager
-                .GetMessageBoxStandard("Creation Successful", "Patient was created!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
+                    .GetMessageBoxStandard("Creation Successful", "Patient was created!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
+                await box2.ShowWindowAsync();
 
-                var result2 = await box2.ShowWindowAsync();
+                images.Clear(); // Clear the temporary images list
+
+                PatientListWindow plw = new PatientListWindow();
+                plw.Show();
+                this.Hide();
             }
-
-            
-           
         }
         catch (Exception ex)
         {
-            // Handle errors gracefully
             var box3 = MessageBoxManager
-               .GetMessageBoxStandard("Error", $"An error occurred: {ex.Message}", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
-
-            var result3 = await box3.ShowWindowAsync();
-
+                .GetMessageBoxStandard("Error", $"An error occurred: {ex.Message}", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+            await box3.ShowWindowAsync();
         }
     }
 
-    public List<Image> images { get; set; }
-
-    public async Task<Image> AddImageAsync(Button sourceButton)
+    public class ImageData
     {
-        // Get the top-level control (typically the Window) from the button.
+        public int ImageId { get; set; }
+        public string ImageName { get; set; }
+        public byte[] ImageContent { get; set; }
+    }
+
+    public async Task<ImageData> AddImageAsync(Button sourceButton)
+    {
+        if (sourceButton == null)
+            throw new ArgumentNullException(nameof(sourceButton));
+
         var topLevel = TopLevel.GetTopLevel(sourceButton);
         if (topLevel == null)
-            throw new InvalidOperationException("Unable to determine top-level window.");
+            throw new InvalidOperationException("The button is not attached to a top-level control.");
 
-        // Set up file picker options.
-        var filePickerOptions = new FilePickerOpenOptions
+        var options = new FilePickerOpenOptions
         {
             Title = "Select Patient Image",
             AllowMultiple = false,
-            FileTypeFilter = new[] { FilePickerFileTypes.ImageJpg, FilePickerFileTypes.ImagePng }
+            FileTypeFilter = new[] { FilePickerFileTypes.ImageAll}
         };
 
-        // Open the file picker dialog.
-        var files = await topLevel.StorageProvider.OpenFilePickerAsync(filePickerOptions);
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(options);
         if (files == null || files.Count == 0)
-            throw new OperationCanceledException("No file was selected.");
+            throw new OperationCanceledException("No file selected.");
 
-        // Get the first selected file's local path.
         string filePath = files[0].TryGetLocalPath();
         if (string.IsNullOrWhiteSpace(filePath))
-            throw new InvalidOperationException("Could not retrieve a valid file path.");
+            throw new InvalidOperationException("Unable to retrieve a valid file path.");
 
-        // Read the file into a byte array.
-        byte[] imageBytes = await Task.Run(() => File.ReadAllBytes(filePath));
-
-        // Use the x:Name of the button as the image name.
-        string imageName = sourceButton.Name;
-
-        // Create a new Image object (using your provided definition).
-        var newImage = new Image
-        {
-            // ImageId is assumed to be set by the database or ORM later.
-            ImageName = imageName,
-            ImageContent = imageBytes,
-            Annotation = new List<ImageAnnotation>()
-        };
-
-        // Add the new image to the public images list.
-        images.Add(newImage);
-
-        // (Optional) If later you assign the client's image list and then want to empty this list,
-        // you can do so after this method returns.
-        return newImage;
-    }
-
-    private async void OnAddImageButtonClick(object sender, RoutedEventArgs e)
-    {
+        byte[] imageBytes;
         try
         {
-            // Cast sender to Button.
-            var button = sender as Button;
-            if (button == null)
-                return;
-
-            Image addedImage = await AddImageAsync(button);
-            // Further processing can be done with addedImage.
+            imageBytes = await Task.Run(() => File.ReadAllBytes(filePath));
         }
         catch (Exception ex)
         {
-            // Handle exceptions (e.g., show a message box).
+            throw new IOException("Error reading the image file.", ex);
+        }
+
+        string imageName = sourceButton.Name ?? "UnnamedImage";
+
+        var newImage = new ImageData
+        {
+            ImageName = imageName,
+            ImageContent = imageBytes
+        };
+
+        images.Add(newImage); // Now images is accessible and properly referenced
+
+        return newImage;
+    }
+
+    public async Task OnAddImageButtonClickAsync(Button sourceButton)
+    {
+        try
+        {
+            var newImage = await AddImageAsync(sourceButton);
+
+            Bitmap bitmap;
+            using (var ms = new MemoryStream(newImage.ImageContent))
+            {
+                bitmap = new Bitmap(ms);
+            }
+
+            var imageControl = new Avalonia.Controls.Image
+            {
+                Source = bitmap,
+                Width = 50,
+                Height = 50,
+                Stretch = Avalonia.Media.Stretch.Uniform
+            };
+
+            sourceButton.Content = imageControl;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
+
+    private async void AddImageButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button)
+        {
+            await OnAddImageButtonClickAsync(button);
+        }
+    }
+
 
 }
