@@ -293,7 +293,8 @@
 					VerticalAlignment="Bottom"
 					Margin="0,0,0,20"
 					Background="Transparent"
-					BorderBrush="Transparent">
+					BorderBrush="Transparent"
+					Click="SettingsButton_Click">
 				  <Image Source="/Assets/Images/settingsIcon.png"
 						 Width="40"
 						 Height="40"

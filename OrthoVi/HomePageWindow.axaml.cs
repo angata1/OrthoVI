@@ -155,6 +155,13 @@ public partial class HomePageWindow : Window
         this.WindowState = WindowState.Minimized;
     }
 
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        SettingsWindow settingsWindow = new SettingsWindow();
+        settingsWindow.Show();
+        this.Hide();
+    }
+
     private void CreateNewPatientButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
        CreateNewPatientWindow cnpw = new CreateNewPatientWindow();

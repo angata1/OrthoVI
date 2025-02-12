@@ -52,6 +52,13 @@ public partial class CreateNewPatientWindow : Window
         this.Hide();
     }
 
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        SettingsWindow settingsWindow = new SettingsWindow();
+        settingsWindow.Show();
+        this.Hide();
+    }
+
     private List<ImageData> images = new List<ImageData>();
 
     public async void CreatePatientButton_Click(object sender, RoutedEventArgs e)

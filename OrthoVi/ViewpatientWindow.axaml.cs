@@ -47,6 +47,14 @@ public partial class ViewpatientWindow : Window
         homeWindow.Show();
         this.Hide();
     }
+
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        SettingsWindow settingsWindow = new SettingsWindow();
+        settingsWindow.Show();
+        this.Hide();
+    }
+
     private void CephStepsWindow_Click(object sender, RoutedEventArgs e)
     {
         CephStepsWindow cph = new CephStepsWindow();

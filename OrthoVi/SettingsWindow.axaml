@@ -3,8 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        x:Class="OrthoVi.PatientListWindow"
-        Title="PatientListWindow"
+        x:Class="OrthoVi.SettingsWindow"
+        Title="SettingsWindow"
 		WindowStartupLocation="CenterScreen"
         Width="900"
         Height="590"
@@ -12,8 +12,7 @@
 		ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
-        SystemDecorations="BorderOnly"
-		Loaded="Window_Loaded">
+        SystemDecorations="BorderOnly">
 	<Window.Background>
 		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
@@ -46,15 +45,15 @@
 		</Style>
 	</Window.Styles>
 
-	
-	
+
+
 
 	<Grid>
 		<!--Main Container-->
 		<Grid Background="Transparent" Width="807"
 		   HorizontalAlignment="Right">
 
-			<TextBlock Text="PATIENTS"
+			<TextBlock Text="SETTINGS"
 					   FontWeight="Bold"
 					   FontSize="58"
 					   Foreground="#FF082635"
@@ -75,14 +74,14 @@
 				</Border.Background>
 
 				<ScrollViewer>
-					<StackPanel x:Name="PatientsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
+					<StackPanel x:Name="SettingsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
 
 
 					</StackPanel>
 				</ScrollViewer>
 
 			</Border>
-			
+
 		</Grid>
 
 		<!--Left Side Menu-->
@@ -107,7 +106,7 @@
 						CornerRadius="100"
 						Margin="0,-500,0,0"
 						BorderBrush="#FF0397C9"
-						BorderThickness="3" 
+						BorderThickness="3"
 						ClipToBounds="True">
 
 					<Image Source="/Assets/Images/personIcon.png"
@@ -128,21 +127,6 @@
 					  BorderBrush="Transparent"
 					   Click="BackButton_Click">
 					<Image Source="/Assets/Images/homeIcon.png"
-						   Width="40"
-						   Height="40"
-						   Stretch="Uniform" />
-				</Button>
-
-				<!--Settings icon-->
-				<Button Width="40"
-					  Height="40"
-					  HorizontalAlignment="Center"
-					  VerticalAlignment="Bottom"
-					  Margin="0,0,0,20"
-					  Background="Transparent"
-					  BorderBrush="Transparent"
-					  Click="SettingsButton_Click">
-					<Image Source="/Assets/Images/settingsIcon.png"
 						   Width="40"
 						   Height="40"
 						   Stretch="Uniform" />
@@ -176,7 +160,7 @@
 				Foreground="#FF082635"
 				FontSize="16"
 				Click="MinimizeButton_Click"/>
-		
+
 		<Border Name="DraggableArea"
 			 Height="50"
 			 Width="800"
@@ -184,6 +168,6 @@
 			 HorizontalAlignment="Left"
 			 Background="Transparent"
 			 Cursor="Hand"/>
-		
+
 	</Grid>
 </Window>

@@ -51,6 +51,13 @@ public partial class PatientListWindow : Window
         this.Hide();
     }
 
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        SettingsWindow settingsWindow = new SettingsWindow();
+        settingsWindow.Show();
+        this.Hide();
+    }
+
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is int clientIndex)
