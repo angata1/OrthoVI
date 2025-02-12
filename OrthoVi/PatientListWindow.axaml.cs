@@ -112,7 +112,7 @@ public partial class PatientListWindow : Window
                 };
 
                 Bitmap bitmap = null;
-                var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Image;
+                var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Images;
 
                 if (clientImages != null && clientImages.Count > 3 && clientImages[3] != null)
                 {
@@ -123,6 +123,7 @@ public partial class PatientListWindow : Window
                         bitmap = new Bitmap(stream);
                     }
                 }
+
 
                 // Create the Avalonia Image control.
                 var imageControl = new Avalonia.Controls.Image

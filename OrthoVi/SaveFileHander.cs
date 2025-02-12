@@ -1,5 +1,4 @@
-﻿// File: DatabaseManager.cs
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,7 +27,10 @@ public class DatabaseManager
 
         using (var context = new UserDbContext(databaseFile))
         {
+            // This will create the database and tables.
             context.Database.EnsureCreated();
+
+            // Create a new user with its related doctor information.
             var user = new User
             {
                 Username = username,
@@ -38,9 +40,12 @@ public class DatabaseManager
                     Firstname = doctorFirstName,
                     Lastname = doctorLastName,
                     ProfilePicture = Convert.ToBase64String(profilePicture),
+                    // Set the foreign key to link this doctor record with the user.
+                    UserUsername = username,
                     Clients = new List<ClientInformation>()
                 }
             };
+
             context.Users.Add(user);
             context.SaveChanges();
         }
@@ -56,12 +61,13 @@ public class DatabaseManager
 
         using (var context = new UserDbContext(databaseFile))
         {
-            var user = context.Users.Include(u => u.DoctorInformation)
-                                     .ThenInclude(d => d.Clients)
-                                     .ThenInclude(c => c.Image)
-                                     .ThenInclude(i => i.Annotation)
-                                     .ThenInclude(a => a.Coordinates)
-                                     .FirstOrDefault(u => u.Username == username && u.Password == password);
+            var user = context.Users
+                              .Include(u => u.DoctorInformation)
+                                .ThenInclude(d => d.Clients)
+                                  .ThenInclude(c => c.Images)
+                                    .ThenInclude(i => i.Annotation)
+                                      .ThenInclude(a => a.Coordinates)
+                              .FirstOrDefault(u => u.Username == username && u.Password == password);
 
             if (user == null)
             {
@@ -98,9 +104,10 @@ public class DatabaseManager
 
         using (var context = new UserDbContext(databaseFile))
         {
-            var user = context.Users.Include(u => u.DoctorInformation)
-                                    .ThenInclude(d => d.Clients)
-                                    .FirstOrDefault(u => u.Username == username && u.Password == password);
+            var user = context.Users
+                              .Include(u => u.DoctorInformation)
+                                .ThenInclude(d => d.Clients)
+                              .FirstOrDefault(u => u.Username == username && u.Password == password);
 
             if (user == null || user.DoctorInformation == null)
             {
@@ -121,10 +128,8 @@ public class DatabaseManager
             }
         }
     }
-
 }
 
-// DbContext and Entity Models
 public class UserDbContext : DbContext
 {
     private readonly string _databaseFile;
@@ -148,20 +153,60 @@ public class UserDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Set primary keys.
         modelBuilder.Entity<User>().HasKey(u => u.Username);
         modelBuilder.Entity<DoctorInformation>().HasKey(d => d.DoctorInformationId);
         modelBuilder.Entity<ClientInformation>().HasKey(c => c.ClientInformationId);
         modelBuilder.Entity<Image>().HasKey(i => i.ImageId);
         modelBuilder.Entity<ImageAnnotation>().HasKey(ia => ia.ImageAnnotationId);
         modelBuilder.Entity<Coordinates>().HasKey(c => c.CoordinatesId);
+
+        // Configure one-to-one: User <--> DoctorInformation.
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.DoctorInformation)
+            .WithOne(d => d.User)
+            .HasForeignKey<DoctorInformation>(d => d.UserUsername)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure one-to-many: DoctorInformation --> ClientInformation.
+        modelBuilder.Entity<DoctorInformation>()
+            .HasMany(d => d.Clients)
+            .WithOne(c => c.DoctorInformation)
+            .HasForeignKey(c => c.DoctorInformationId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure one-to-many: ClientInformation --> Image.
+        modelBuilder.Entity<ClientInformation>()
+            .HasMany(c => c.Images)
+            .WithOne(i => i.ClientInformation)
+            .HasForeignKey(i => i.ClientInformationId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure one-to-many: Image --> ImageAnnotation.
+        modelBuilder.Entity<Image>()
+            .HasMany(i => i.Annotation)
+            .WithOne(a => a.Image)
+            .HasForeignKey(a => a.ImageId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure one-to-one: ImageAnnotation --> Coordinates.
+        modelBuilder.Entity<ImageAnnotation>()
+            .HasOne(a => a.Coordinates)
+            .WithOne()
+            .HasForeignKey<ImageAnnotation>(a => a.CoordinatesId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
 
-// Entities
+// -------------------------
+// Entity Classes
+// -------------------------
+
 public class User
 {
     public string Username { get; set; }
     public string Password { get; set; }
+    // Navigation property for one-to-one relationship.
     public DoctorInformation DoctorInformation { get; set; }
 }
 
@@ -171,6 +216,13 @@ public class DoctorInformation
     public string Firstname { get; set; }
     public string Lastname { get; set; }
     public string ProfilePicture { get; set; }
+
+    // Foreign key property to link to User.
+    public string UserUsername { get; set; }
+    // Navigation back to User.
+    public User User { get; set; }
+
+    // One-to-many: a doctor can have many clients.
     public List<ClientInformation> Clients { get; set; }
 }
 
@@ -182,7 +234,14 @@ public class ClientInformation
     public string ClientLastName { get; set; }
     public string Gender { get; set; }
     public int ClientAge { get; set; }
-    public List<Image> Image { get; set; }
+
+    // Foreign key property to link to DoctorInformation.
+    public int DoctorInformationId { get; set; }
+    // Navigation back to DoctorInformation.
+    public DoctorInformation DoctorInformation { get; set; }
+
+    // One-to-many: a client can have many images.
+    public List<Image> Images { get; set; }
 }
 
 public class Image
@@ -190,6 +249,13 @@ public class Image
     public int ImageId { get; set; }
     public string ImageName { get; set; }
     public byte[] ImageContent { get; set; }
+
+    // Foreign key property to link to ClientInformation.
+    public int ClientInformationId { get; set; }
+    // Navigation back to ClientInformation.
+    public ClientInformation ClientInformation { get; set; }
+
+    // One-to-many: an image can have many annotations.
     public List<ImageAnnotation> Annotation { get; set; }
 }
 
@@ -197,6 +263,13 @@ public class ImageAnnotation
 {
     public int ImageAnnotationId { get; set; }
     public string LandmarkName { get; set; }
+
+    // Foreign key property to link back to Image.
+    public int ImageId { get; set; }
+    public Image Image { get; set; }
+
+    // Foreign key property to link to Coordinates.
+    public int CoordinatesId { get; set; }
     public Coordinates Coordinates { get; set; }
 }
 

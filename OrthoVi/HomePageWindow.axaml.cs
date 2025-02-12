@@ -88,7 +88,7 @@ public partial class HomePageWindow : Window
             button.Click += ViewPatientButton_Click;
 
             Bitmap bitmap = null;
-            var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Image;
+            var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Images;
 
             if (clientImages != null && clientImages.Count > 3 && clientImages[3] != null)
             {
@@ -99,6 +99,7 @@ public partial class HomePageWindow : Window
                     bitmap = new Bitmap(stream);
                 }
             }
+
 
             var image = new Avalonia.Controls.Image
             {

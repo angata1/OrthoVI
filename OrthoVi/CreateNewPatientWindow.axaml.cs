@@ -112,13 +112,14 @@ public partial class CreateNewPatientWindow : Window
                     ClientAge = patientAge,
 
                     // Convert List<ImageData> to List<Image>
-                    Image = images.ConvertAll(img => new Image
+                    Images = images.ConvertAll(img => new Image
                     {
                         ImageName = img.ImageName,
                         ImageContent = img.ImageContent,
                         Annotation = new List<ImageAnnotation>() // Initialize empty list if needed
                     })
                 };
+
 
                 SessionManager.LoggedInUser.DoctorInformation.Clients.Add(newClient);
                 dbManager.UpdateDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser);
