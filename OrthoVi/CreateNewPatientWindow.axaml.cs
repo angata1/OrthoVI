@@ -49,14 +49,14 @@ public partial class CreateNewPatientWindow : Window
     {
         HomePageWindow homeWindow = new HomePageWindow();
         homeWindow.Show();
-        this.Hide();
+        this.Close();
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         SettingsWindow settingsWindow = new SettingsWindow();
         settingsWindow.Show();
-        this.Hide();
+        this.Close();
     }
 
     private List<ImageData> images = new List<ImageData>();
@@ -132,7 +132,7 @@ public partial class CreateNewPatientWindow : Window
 
                 PatientListWindow plw = new PatientListWindow();
                 plw.Show();
-                this.Hide();
+                this.Close();
             }
         }
         catch (Exception ex)
@@ -233,5 +233,40 @@ public partial class CreateNewPatientWindow : Window
         }
     }
 
+    public void SetProfileImage()
+    {
+        // Check if there's a valid profile picture string.
+        var base64Image = SessionManager.LoggedInUser.DoctorInformation.ProfilePicture;
+        if (string.IsNullOrWhiteSpace(base64Image))
+        {
+            // Optionally, set a default or placeholder image.
+            ProfilePicture.Source = null;
+            return;
+        }
 
+        try
+        {
+            // Convert the Base64 string back to a byte array.
+            byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+            // Create a memory stream from the byte array.
+            using (var stream = new MemoryStream(imageBytes))
+            {
+                // Create a Bitmap from the stream.
+                var bitmap = new Bitmap(stream);
+                ProfilePicture.Source = bitmap;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error converting the image: " + ex.Message);
+            // Handle conversion error (set a default image or leave the control blank).
+            ProfilePicture.Source = null;
+        }
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        SetProfileImage();
+    }
 }

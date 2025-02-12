@@ -173,11 +173,11 @@
 				<!--Account icon-->
 				<Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-800,0,0" BorderBrush="#FF0397C9" BorderThickness="3"  ClipToBounds="True">
 
-					<Image Source="/Assets/Images/personIcon.png"
-						   Margin="0,20,0,0"
+					<Image x:Name="ProfilePicture"
+						   Source="/Assets/Images/personIcon.png"
 						   Width="70"
 						   Height="70"
-						   Stretch="Uniform"
+						   Stretch="Fill"
 						   />
 				</Border>
 

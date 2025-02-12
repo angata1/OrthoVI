@@ -7,6 +7,8 @@ using MsBox.Avalonia.Enums;
 using MsBox.Avalonia;
 using System;
 using static OrthoVi.MainWindow;
+using Avalonia.Media.Imaging;
+using System.IO;
 
 namespace OrthoVi;
 
@@ -45,26 +47,27 @@ public partial class ViewpatientWindow : Window
         homeWindow.InvalidateMeasure();
         homeWindow.InvalidateVisual();
         homeWindow.Show();
-        this.Hide();
+        this.Close();
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         SettingsWindow settingsWindow = new SettingsWindow();
         settingsWindow.Show();
-        this.Hide();
+        this.Close();
     }
 
     private void CephStepsWindow_Click(object sender, RoutedEventArgs e)
     {
         CephStepsWindow cph = new CephStepsWindow();
         cph.Show();
-        this.Hide();
+        this.Close();
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         SetPatientInfo();
+        SetProfileImage();
     }
 
     private async void DeletePatientButton_Click(object sender, RoutedEventArgs e)
@@ -102,6 +105,51 @@ public partial class ViewpatientWindow : Window
             string patientAgeGender = patientListWindow.SetPatientInformation_AgeGender(clientIndex);
             PatientNameTB.Text= patientName;
             PatientAgeGenderTB.Text= patientAgeGender;
+        }
+    }
+
+    public void SetProfileImage()
+    {
+        // Check if there's a valid profile picture string.
+        var base64Image = SessionManager.LoggedInUser.DoctorInformation.ProfilePicture;
+        if (string.IsNullOrWhiteSpace(base64Image))
+        {
+            // Optionally, set a default or placeholder image.
+            ProfilePicture.Source = null;
+            return;
+        }
+
+        try
+        {
+            // Convert the Base64 string back to a byte array.
+            byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+            // Create a memory stream from the byte array.
+            using (var stream = new MemoryStream(imageBytes))
+            {
+                // Create a Bitmap from the stream.
+                var bitmap = new Bitmap(stream);
+                ProfilePicture.Source = bitmap;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error converting the image: " + ex.Message);
+            // Handle conversion error (set a default image or leave the control blank).
+            ProfilePicture.Source = null;
+        }
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button clickedButton)
+        {
+            // Access the button's x:Name property.
+            string buttonName = clickedButton.Name;
+
+            // Use the buttonName as needed.
+            Console.WriteLine($"Button clicked: {buttonName}");
+            // Add any other logic that depends on the button's name here.
         }
     }
 }

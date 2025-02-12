@@ -8,6 +8,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using System;
 using System.IO;
+using System.Linq;
 using static OrthoVi.MainWindow;
 
 namespace OrthoVi;
@@ -48,14 +49,14 @@ public partial class PatientListWindow : Window
     {
         HomePageWindow homeWindow = new HomePageWindow();
         homeWindow.Show();
-        this.Hide();
+        this.Close();
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         SettingsWindow settingsWindow = new SettingsWindow();
         settingsWindow.Show();
-        this.Hide();
+        this.Close();
     }
 
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
@@ -65,7 +66,7 @@ public partial class PatientListWindow : Window
             ViewpatientWindow vpw = new ViewpatientWindow();
             vpw.ClientIndexTextBlock.Text = $"{clientIndex}";
             vpw.Show();
-            this.Hide();
+            this.Close();
         }
     }
 
@@ -73,6 +74,7 @@ public partial class PatientListWindow : Window
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         CreateButton();
+        SetProfileImage();
     }
 
 
@@ -114,13 +116,17 @@ public partial class PatientListWindow : Window
                 Bitmap bitmap = null;
                 var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Images;
 
-                if (clientImages != null && clientImages.Count > 3 && clientImages[3] != null)
+                if (clientImages != null && clientImages.Any())
                 {
-                    // Load the client's image from the stored image bytes.
-                    var clientImage = clientImages[3];
-                    using (var stream = new MemoryStream(clientImage.ImageContent))
+                    // Find the image with the name "FrontalPhoto"
+                    var clientImage = clientImages.FirstOrDefault(img => img.ImageName == "FrontalPhoto");
+                    if (clientImage != null)
                     {
-                        bitmap = new Bitmap(stream);
+                        // Load the client's image from the stored image bytes.
+                        using (var stream = new MemoryStream(clientImage.ImageContent))
+                        {
+                            bitmap = new Bitmap(stream);
+                        }
                     }
                 }
 
@@ -220,4 +226,37 @@ public partial class PatientListWindow : Window
         }
     }
 
+    public void SetProfileImage()
+    {
+        // Check if there's a valid profile picture string.
+        var base64Image = SessionManager.LoggedInUser.DoctorInformation.ProfilePicture;
+        if (string.IsNullOrWhiteSpace(base64Image))
+        {
+            // Optionally, set a default or placeholder image.
+            ProfilePicture.Source = null;
+            return;
+        }
+
+        try
+        {
+            // Convert the Base64 string back to a byte array.
+            byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+            // Create a memory stream from the byte array.
+            using (var stream = new MemoryStream(imageBytes))
+            {
+                // Create a Bitmap from the stream.
+                var bitmap = new Bitmap(stream);
+                ProfilePicture.Source = bitmap;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error converting the image: " + ex.Message);
+            // Handle conversion error (set a default image or leave the control blank).
+            ProfilePicture.Source = null;
+        }
+    }
+
 }
+

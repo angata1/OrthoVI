@@ -93,6 +93,28 @@ public class DatabaseManager
         }
     }
 
+    public void UpdateProfilePicture(string username, byte[] newProfilePicture)
+    {
+        string databaseFile = $"{mainPath}{username}.db";
+        if (!File.Exists(databaseFile))
+        {
+            throw new FileNotFoundException("Database file not found.");
+        }
+
+        using (var context = new UserDbContext(databaseFile))
+        {
+            // Find the user's doctor information
+            var doctorInfo = context.DoctorInformations.FirstOrDefault(d => d.UserUsername == username);
+
+            // Convert and update the profile picture
+            doctorInfo.ProfilePicture = Convert.ToBase64String(newProfilePicture);
+
+            // Save changes to the database
+            context.SaveChanges();
+        }
+    }
+
+
     public void DeleteClient(string username, string password, int clientId)
     {
         string databaseFile = $"{mainPath}{username}.db";

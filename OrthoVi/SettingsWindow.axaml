@@ -12,7 +12,8 @@
 		ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
-        SystemDecorations="BorderOnly">
+        SystemDecorations="BorderOnly"
+		Loaded="Window_Loaded">
 	<Window.Background>
 		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
@@ -42,6 +43,28 @@
 		</Style>
 		<Style Selector="TextBox:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="BorderBrush" Value="Transparent" />
+		</Style>
+
+		<!-- Style for Delete button -->
+		<Style Selector="Button.DeleteButtonAnimation">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Background">
+				<Setter.Value>
+					<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+						<GradientStops>
+							<GradientStop Offset="0.0" Color="#FFE96365" />
+							<GradientStop Offset="1.0" Color="#FFA2393A" />
+						</GradientStops>
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="CornerRadius" Value="10" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.2" />
+					<BrushTransition Property="Background" Duration="0:0:0.5" />
+				</Transitions>
+			</Setter>
 		</Style>
 	</Window.Styles>
 
@@ -74,13 +97,16 @@
 				</Border.Background>
 
 				<ScrollViewer>
-					<StackPanel x:Name="SettingsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
-						<StackPanel Orientation="Horizontal" Spacing="100" >
-							<TextBlock Text="Add profile picture" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center"/>
-							<Button Content="Add" Classes="MainButtonAnimation" Width="313" Height="76" VerticalAlignment="Center"/>
+					<StackPanel x:Name="SettingsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="30">
+						<StackPanel Orientation="Horizontal" Spacing="80" >
+							<TextBlock Text="Add profile picture" FontSize="35" FontWeight="SemiBold" VerticalAlignment="Center"/>
+							<Button Content="Add" FontSize="40" FontWeight="SemiBold" Classes="MainButtonAnimation" Click="ProfilePictureButton_Click" Width="313" Height="76" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 						</StackPanel>
 
-
+						<StackPanel Orientation="Horizontal" Spacing="140" >
+							<TextBlock Text="Delete account" FontSize="35" FontWeight="SemiBold" VerticalAlignment="Center"/>
+							<Button Content="Delete" FontSize="40" FontWeight="SemiBold" Classes="DeleteButtonAnimation" Width="313" Height="76" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+						</StackPanel>
 					</StackPanel>
 				</ScrollViewer>
 
@@ -104,7 +130,8 @@
 
 			<Grid>
 				<!--Account icon-->
-				<Border Width="60"
+				<Border 
+						Width="60"
 						Height="60"
 						Background="White"
 						CornerRadius="100"
@@ -113,11 +140,11 @@
 						BorderThickness="3"
 						ClipToBounds="True">
 
-					<Image Source="/Assets/Images/personIcon.png"
-						   Margin="0,20,0,0"
+					<Image x:Name="ProfilePicture"
+						   Source="/Assets/Images/personIcon.png"
 						   Width="70"
 						   Height="70"
-						   Stretch="Uniform"
+						   Stretch="Fill"
 						   />
 				</Border>
 

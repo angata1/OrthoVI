@@ -128,11 +128,11 @@
 					  BorderThickness="3"
 					  ClipToBounds="True">
 
-				  <Image Source="/Assets/Images/personIcon.png"
-						 Margin="0,20,0,0"
-						 Width="70"
-						 Height="70"
-						 Stretch="Uniform"
+				  <Image x:Name="ProfilePicture"
+							 Source="/Assets/Images/personIcon.png"
+							 Width="70"
+							 Height="70"
+							 Stretch="Fill"
 						   />
 			  </Border>
 			  
