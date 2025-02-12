@@ -75,6 +75,10 @@
 
 				<ScrollViewer>
 					<StackPanel x:Name="SettingsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="20">
+						<StackPanel Orientation="Horizontal" Spacing="100" >
+							<TextBlock Text="Add profile picture" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center"/>
+							<Button Content="Add" Classes="MainButtonAnimation" Width="313" Height="76" VerticalAlignment="Center"/>
+						</StackPanel>
 
 
 					</StackPanel>
