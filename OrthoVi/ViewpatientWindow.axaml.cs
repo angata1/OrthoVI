@@ -9,6 +9,9 @@ using System;
 using static OrthoVi.MainWindow;
 using Avalonia.Media.Imaging;
 using System.IO;
+using Avalonia.VisualTree;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace OrthoVi;
 
@@ -68,6 +71,7 @@ public partial class ViewpatientWindow : Window
     {
         SetPatientInfo();
         SetProfileImage();
+        AssignImagesToElements();
     }
 
     private async void DeletePatientButton_Click(object sender, RoutedEventArgs e)
@@ -152,4 +156,50 @@ public partial class ViewpatientWindow : Window
             // Add any other logic that depends on the button's name here.
         }
     }
+
+    private void AssignImagesToElements()
+    {
+        var patientImagesPanel = this.FindControl<StackPanel>("PatientImagesSP");
+        if (patientImagesPanel == null)
+        {
+            // If the panel is not found, exit the method.
+            return;
+        }
+
+        // Get only the Image elements that are descendants of the found StackPanel.
+        var imageControls = GetAllDescendants(patientImagesPanel)
+                            .OfType<Avalonia.Controls.Image>()
+                            .Where(img => !string.IsNullOrEmpty(img.GetValue<string>(Control.NameProperty)));
+
+        int clientIndex = int.Parse(ClientIndexTextBlock.Text);
+        Bitmap bitmap = null;
+        var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Images;
+
+        foreach (var image in imageControls)
+        {
+            string name = image.GetValue<string>(Control.NameProperty);
+            if (!string.IsNullOrEmpty(name))
+            {
+                var clientImage = clientImages.FirstOrDefault(img => img.ImageName == "FrontalPhoto");
+                using (var stream = new MemoryStream(clientImage.ImageContent))
+                {
+                    image.Source = new Bitmap(stream);
+                }
+            }
+        }
+    }
+
+    // Helper method to recursively get all visual children
+    private static IEnumerable<Visual> GetAllDescendants(Visual parent)
+    {
+        foreach (var child in parent.GetVisualChildren())
+        {
+            yield return child;
+            foreach (var descendant in GetAllDescendants(child))
+            {
+                yield return descendant;
+            }
+        }
+    }
+
 }
