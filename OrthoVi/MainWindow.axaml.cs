@@ -55,10 +55,10 @@ namespace OrthoVi
             string logInPassword = PasswordLogInTextBox.Text;
             if (logInUsername != null && logInPassword != null)
             {
-                var user = dbManager.ReadDatabase(logInUsername, logInPassword);
-                if (user != null)
+                dbManager.ReadDatabase(logInUsername, logInPassword);
+                if (SessionManager.LoggedInUser != null)
                 {
-                    SessionManager.LoggedInUser = user;
+                    
 
                     // Show the message box dialog
                     var box = MessageBoxManager
@@ -73,7 +73,7 @@ namespace OrthoVi
                 else
                 {
                     var box = MessageBoxManager
-                    .GetMessageBoxStandard("Error", "The username or password is wrong", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+                    .GetMessageBoxStandard("Error", "Incorrect username or password", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
 
                     var result = await box.ShowWindowAsync();
                 }

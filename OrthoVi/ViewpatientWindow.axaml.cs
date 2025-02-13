@@ -63,7 +63,7 @@ public partial class ViewpatientWindow : Window
     {
         var dbManager = new DatabaseManager();
         int clientIndex = int.Parse(ClientIndexTextBlock.Text);
-        SessionManager.LoggedInUser = dbManager.ReadDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password);
+        dbManager.ReadDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password);
         var clientToDelete = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex];
 
         if (clientToDelete != null)

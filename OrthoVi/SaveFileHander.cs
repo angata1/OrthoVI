@@ -1,9 +1,11 @@
 ﻿// File: DatabaseManager.cs
+using Microsoft.EntityFrameworkCore;
+using MsBox.Avalonia;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using static OrthoVi.MainWindow;
 
 public class DatabaseManager
 {
@@ -46,29 +48,37 @@ public class DatabaseManager
         }
     }
 
-    public User ReadDatabase(string username, string password)
+    public void ReadDatabase(string username, string password)
     {
         string databaseFile = $"{mainPath}{username}.db";
-        if (!File.Exists(databaseFile))
+        try
         {
-            throw new FileNotFoundException("Database file not found.");
-        }
 
-        using (var context = new UserDbContext(databaseFile))
-        {
-            var user = context.Users.Include(u => u.DoctorInformation)
-                                     .ThenInclude(d => d.Clients)
-                                     .ThenInclude(c => c.Image)
-                                     .ThenInclude(i => i.Annotation)
-                                     .ThenInclude(a => a.Coordinates)
-                                     .FirstOrDefault(u => u.Username == username && u.Password == password);
 
-            if (user == null)
+            using (var context = new UserDbContext(databaseFile))
             {
-                Console.WriteLine("Incorrect username or password");
-                return null;
+                var user = context.Users.Include(u => u.DoctorInformation)
+                                         .ThenInclude(d => d.Clients)
+                                         .ThenInclude(c => c.Image)
+                                         .ThenInclude(i => i.Annotation)
+                                         .ThenInclude(a => a.Coordinates)
+                                         .FirstOrDefault(u => u.Username == username && u.Password == password);
+
+                if (user == null)
+                {
+                    
+                    SessionManager.LoggedInUser = null;
+                }
+                else
+                {
+                    SessionManager.LoggedInUser = user;
+                }
+                
             }
-            return user;
+        }
+        catch (Exception)
+        {
+            
         }
     }
 
