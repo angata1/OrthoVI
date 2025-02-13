@@ -146,20 +146,20 @@
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
 						<!--Cell of Image with Title-->
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="LateralCeph"  Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="LATERAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="CEPH" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="PaCeph" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="PA CEPH" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="Orthopan" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="ORTHOPAN" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="FrontalPhoto" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="FRONTAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
@@ -167,22 +167,22 @@
 					<!--Row 2-->
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="SmilePhoto" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="SMILE" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image x:Name="AnglePhoto" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="ANGLE" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image x:Name="LateralPhoto" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="LATERAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="PHOTO" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation" ><Image x:Name="RightIntraoral" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="RIGHT" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="INTRAORAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
@@ -190,22 +190,22 @@
 					<!--Row 3-->
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="FrontIntraoral" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="FRONT" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="INTRAORAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="LeftIntraoral" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="LEFT" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="INTRAORAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="UpperOcclusal" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="UPPER" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="OCCLUSAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Vertical" Spacing="3">
-							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image Source="/Assets/Images/imageIcon.png"/></Button>
+							<Button Width="76" Height="76" Classes="ImageButtonAnimation"><Image x:Name="LowerOcclusal" Source="/Assets/Images/imageIcon.png"/></Button>
 							<TextBlock Text="LOWER" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 							<TextBlock Text="OCCLUSAL" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center"/>
 						</StackPanel>

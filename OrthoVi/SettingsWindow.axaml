@@ -105,7 +105,7 @@
 
 						<StackPanel Orientation="Horizontal" Spacing="140" >
 							<TextBlock Text="Delete account" FontSize="35" FontWeight="SemiBold" VerticalAlignment="Center"/>
-							<Button Content="Delete" FontSize="40" FontWeight="SemiBold" Classes="DeleteButtonAnimation" Width="313" Height="76" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+							<Button Content="Delete" Click="DeleteUserButton_Click" FontSize="40" FontWeight="SemiBold" Classes="DeleteButtonAnimation" Width="313" Height="76" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 						</StackPanel>
 					</StackPanel>
 				</ScrollViewer>

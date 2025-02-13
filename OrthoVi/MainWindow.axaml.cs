@@ -55,30 +55,30 @@ namespace OrthoVi
             string logInPassword = PasswordLogInTextBox.Text;
             if (logInUsername != null && logInPassword != null)
             {
-                var user = dbManager.ReadDatabase(logInUsername, logInPassword);
-                if (user != null)
+                dbManager.ReadDatabase(logInUsername, logInPassword);
+                if (SessionManager.LoggedInUser != null)
                 {
-                    SessionManager.LoggedInUser = user;
+
 
                     // Show the message box dialog
                     var box = MessageBoxManager
                     .GetMessageBoxStandard("Log In Successful", "You successfully logged in your account!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
 
-                     var result = await box.ShowWindowAsync();
+                    var result = await box.ShowWindowAsync();
 
-                     TrayWindow trayWindow = new TrayWindow();
-                     HomePageWindow homeWindow = new HomePageWindow();
-                     homeWindow.Show();
-                     this.Hide();
+                    TrayWindow trayWindow = new TrayWindow();
+                    HomePageWindow homeWindow = new HomePageWindow();
+                    homeWindow.Show();
+                    this.Hide();
                 }
                 else
                 {
                     var box = MessageBoxManager
-                    .GetMessageBoxStandard("Error", "The username or password is wrong", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+                    .GetMessageBoxStandard("Error", "Incorrect username or password", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
 
                     var result = await box.ShowWindowAsync();
                 }
-               
+
             }
             else
             {
@@ -87,9 +87,6 @@ namespace OrthoVi
 
                 var result = await box.ShowWindowAsync();
             }
-
-            
-           
         }
         private async void SignUpButton_Click(object sender, RoutedEventArgs e)
         {

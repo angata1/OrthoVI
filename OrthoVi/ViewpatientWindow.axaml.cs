@@ -78,7 +78,7 @@ public partial class ViewpatientWindow : Window
     {
         var dbManager = new DatabaseManager();
         int clientIndex = int.Parse(ClientIndexTextBlock.Text);
-        SessionManager.LoggedInUser = dbManager.ReadDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password);
+        dbManager.ReadDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password);
         var clientToDelete = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex];
 
         if (clientToDelete != null)
@@ -180,10 +180,17 @@ public partial class ViewpatientWindow : Window
             string name = image.GetValue<string>(Control.NameProperty);
             if (!string.IsNullOrEmpty(name))
             {
-                var clientImage = clientImages.FirstOrDefault(img => img.ImageName == "FrontalPhoto");
-                using (var stream = new MemoryStream(clientImage.ImageContent))
+                var clientImage = clientImages.FirstOrDefault(img => img.ImageName == name);
+                if (clientImage == null)
                 {
-                    image.Source = new Bitmap(stream);
+                    image.Source = null;
+                }
+                else
+                {
+                    using (var stream = new MemoryStream(clientImage.ImageContent))
+                    {
+                        image.Source = new Bitmap(stream);
+                    }
                 }
             }
         }
