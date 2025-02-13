@@ -3,17 +3,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        x:Class="OrthoVi.LandmarksWindow"
-		xmlns:local="clr-namespace:OrthoVi.Helpers" 
-        Title="LandmarksWindow"
+        x:Class="OrthoVi.SettingsWindow"
+        Title="SettingsWindow"
 		WindowStartupLocation="CenterScreen"
-        Width="1200"
-        Height="890"
+        Width="900"
+        Height="590"
         CanResize="False"
 		ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
-        SystemDecorations="BorderOnly">
+        SystemDecorations="BorderOnly"
+		Loaded="Window_Loaded">
 	<Window.Background>
 		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
@@ -45,100 +45,47 @@
 			<Setter Property="BorderBrush" Value="Transparent" />
 		</Style>
 
+		<!-- Style for Delete button -->
+		<Style Selector="Button.DeleteButtonAnimation">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Background">
+				<Setter.Value>
+					<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+						<GradientStops>
+							<GradientStop Offset="0.0" Color="#FFE96365" />
+							<GradientStop Offset="1.0" Color="#FFA2393A" />
+						</GradientStops>
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="CornerRadius" Value="10" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<CornerRadiusTransition Property="CornerRadius" Duration="0:0:0.2" />
+					<BrushTransition Property="Background" Duration="0:0:0.5" />
+				</Transitions>
+			</Setter>
+		</Style>
 	</Window.Styles>
 
 
 
 
 	<Grid>
-
 		<!--Main Container-->
 		<Grid Background="Transparent" Width="807"
 		   HorizontalAlignment="Right">
 
-			<TextBlock Text="CEPHALOMETRIC ANALYSIS: LANDMARKS"
+			<TextBlock Text="SETTINGS"
 					   FontWeight="Bold"
-					   FontSize="36"
+					   FontSize="58"
 					   Foreground="#FF082635"
-					   Margin="-260,20,0,0"/>
-
-			<Button         Width="183"
-							Height="84"
-							Margin="-270,-650,0,0"
-							Classes="MainButtonAnimation"
-							HorizontalContentAlignment="Center"
-							VerticalContentAlignment="Center"
-							>
-				<TextBlock FontSize="25"
-							FontWeight="Bold"
-						   HorizontalAlignment="Center"
-							VerticalAlignment="Center"
-						   Foreground="White"
-						   >
-					
-					AI<LineBreak/>LANDMARKS
-					
-				</TextBlock>
-				
-			</Button>
-			
+					   Margin="30,41,0,0"/>
 
 
-			<!--Buttons for points-->
 			<Border BoxShadow="-0 5 10 0 LightGray"
-				 Width="165" Height="682"
-				 Margin="-260,140,0,0"
-				 Padding="13"
-				 HorizontalAlignment="Left"
-				 CornerRadius="25">
-				<Border.Background>
-					<LinearGradientBrush  StartPoint="50%,0%" EndPoint="50%,100%">
-						<GradientStop Color="#FFB2F3FF" Offset="0.0" />
-						<GradientStop Color="#FF90E0EF" Offset="1.0" />
-					</LinearGradientBrush>
-				</Border.Background>
-				<StackPanel Spacing="10" VerticalAlignment="Top" HorizontalAlignment="Center">
-					<ToggleButton Content="PO"
-								  FontSize="20"
-								  FontWeight="Bold"
-								  Width="134"
-								  Height="35"
-								  HorizontalContentAlignment="Center"
-								  VerticalContentAlignment="Center"
-								  BorderBrush="Transparent"
-								  Classes="ToggleButtonAnimation"
-								  local:ToggleButtonGroup.GroupName="GenderGroup"
-								   />
-					<ToggleButton Content="MO"
-							  FontSize="20"
-							  FontWeight="Bold"
-							  Width="134"
-							  Height="35"
-							  HorizontalContentAlignment="Center"
-							  VerticalContentAlignment="Center"
-							  BorderBrush="Transparent"
-							  Classes="ToggleButtonAnimation"
-							  local:ToggleButtonGroup.GroupName="GenderGroup"
-								   />
-					<ToggleButton Content="MO"
-							  FontSize="20"
-							  FontWeight="Bold"
-							  Width="134"
-							  Height="35"
-							  HorizontalContentAlignment="Center"
-							  VerticalContentAlignment="Center"
-							  BorderBrush="Transparent"
-							  Classes="ToggleButtonAnimation"
-							  local:ToggleButtonGroup.GroupName="GenderGroup"
-								   />
-				</StackPanel>
-			</Border>
-
-			<!--Image-->
-			<Border BoxShadow="-0 5 10 0 LightGray"
-				 Width="809"
-				 Height="776"
-				 Margin="-35,60,0,0"
+				 Width="749" Height="433"
+				 Margin="30,100,0,0"
 				 Padding="13"
 				 HorizontalAlignment="Left"
 				 CornerRadius="25">
@@ -149,11 +96,23 @@
 					</LinearGradientBrush>
 				</Border.Background>
 
-				<Image Source="/Assets/Images/ceph.jpg"
-						   Stretch="Uniform"/>
+				<ScrollViewer>
+					<StackPanel x:Name="SettingsListStackPanel" Orientation="Vertical" Margin="15,15,0,0" Spacing="30">
+						<StackPanel Orientation="Horizontal" Spacing="80" >
+							<TextBlock Text="Add profile picture" FontSize="35" FontWeight="SemiBold" VerticalAlignment="Center"/>
+							<Button Content="Add" FontSize="40" FontWeight="SemiBold" Classes="MainButtonAnimation" Click="ProfilePictureButton_Click" Width="313" Height="76" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+						</StackPanel>
+
+						<StackPanel Orientation="Horizontal" Spacing="140" >
+							<TextBlock Text="Delete account" FontSize="35" FontWeight="SemiBold" VerticalAlignment="Center"/>
+							<Button Content="Delete" FontSize="40" FontWeight="SemiBold" Classes="DeleteButtonAnimation" Width="313" Height="76" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+						</StackPanel>
+					</StackPanel>
+				</ScrollViewer>
+
 			</Border>
+
 		</Grid>
-
 
 		<!--Left Side Menu-->
 		<Border
@@ -161,7 +120,7 @@
 		  CornerRadius="3"
 		  BoxShadow="5 0 45 0 LightGray"
 		  HorizontalAlignment="Left"
-		  Height="890" VerticalAlignment="Center" Width="93">
+		  Height="590" VerticalAlignment="Center" Width="93">
 			<Border.Background>
 				<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 					<GradientStop Color="#FF3DC6E1" Offset="0.0" />
@@ -171,7 +130,15 @@
 
 			<Grid>
 				<!--Account icon-->
-				<Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-800,0,0" BorderBrush="#FF0397C9" BorderThickness="3"  ClipToBounds="True">
+				<Border 
+						Width="60"
+						Height="60"
+						Background="White"
+						CornerRadius="100"
+						Margin="0,-500,0,0"
+						BorderBrush="#FF0397C9"
+						BorderThickness="3"
+						ClipToBounds="True">
 
 					<Image x:Name="ProfilePicture"
 						   Source="/Assets/Images/personIcon.png"
@@ -186,25 +153,11 @@
 					  Height="40"
 					  HorizontalAlignment="Center"
 					  VerticalAlignment="Bottom"
-					  Margin="0,0,0,750"
+					  Margin="0,0,0,450"
 					  Background="Transparent"
 					  BorderBrush="Transparent"
 					   Click="BackButton_Click">
 					<Image Source="/Assets/Images/homeIcon.png"
-						   Width="40"
-						   Height="40"
-						   Stretch="Uniform" />
-				</Button>
-
-				<!--Settings icon-->
-				<Button Width="40"
-					  Height="40"
-					  HorizontalAlignment="Center"
-					  VerticalAlignment="Bottom"
-					  Margin="0,0,0,20"
-					  Background="Transparent"
-					  BorderBrush="Transparent">
-					<Image Source="/Assets/Images/settingsIcon.png"
 						   Width="40"
 						   Height="40"
 						   Stretch="Uniform" />
@@ -246,6 +199,6 @@
 			 HorizontalAlignment="Left"
 			 Background="Transparent"
 			 Cursor="Hand"/>
-	</Grid>
 
+	</Grid>
 </Window>

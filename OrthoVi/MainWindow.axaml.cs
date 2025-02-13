@@ -66,6 +66,7 @@ namespace OrthoVi
 
                      var result = await box.ShowWindowAsync();
 
+                     TrayWindow trayWindow = new TrayWindow();
                      HomePageWindow homeWindow = new HomePageWindow();
                      homeWindow.Show();
                      this.Hide();
@@ -86,6 +87,8 @@ namespace OrthoVi
 
                 var result = await box.ShowWindowAsync();
             }
+
+            
            
         }
         private async void SignUpButton_Click(object sender, RoutedEventArgs e)

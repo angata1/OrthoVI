@@ -128,11 +128,11 @@
 					  BorderThickness="3"
 					  ClipToBounds="True">
 
-				  <Image Source="/Assets/Images/personIcon.png"
-						 Margin="0,20,0,0"
-						 Width="70"
-						 Height="70"
-						 Stretch="Uniform"
+				  <Image x:Name="ProfilePicture"
+							 Source="/Assets/Images/personIcon.png"
+							 Width="70"
+							 Height="70"
+							 Stretch="Fill"
 						   />
 			  </Border>
 			  
@@ -143,7 +143,8 @@
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,20"
                 Background="Transparent"
-                BorderBrush="Transparent">
+                BorderBrush="Transparent"
+				Click="SettingsButton_Click">
             <Image Source="/Assets/Images/settingsIcon.png"
                    Width="40"
                    Height="40"

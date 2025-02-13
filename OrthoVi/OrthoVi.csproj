@@ -50,6 +50,5 @@
   <!-- Embedded Font Resources -->
   <ItemGroup>
 	  <AvaloniaResource Include="Assets\**" />
-	  <AvaloniaResource Include="Assets\Images\imageIcon.png" />
   </ItemGroup>
 </Project>

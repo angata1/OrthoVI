@@ -140,7 +140,7 @@
 					</LinearGradientBrush>
 				</Border.Background>
 
-				<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+				<StackPanel x:Name="PatientImagesSP" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
 					<!--Row 1-->
 					<!--Row of Images-->
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
@@ -232,12 +232,12 @@
 			<Grid>
 				<!--Account icon-->
 				<Border Width="60" Height="60" Background="White" CornerRadius="100" Margin="0,-500,0,0" BorderBrush="#FF0397C9" BorderThickness="3"  ClipToBounds="True">
-					
-					<Image Source="/Assets/Images/personIcon.png"
-						   Margin="0,20,0,0"
+
+					<Image x:Name="ProfilePicture"
+						   Source="/Assets/Images/personIcon.png"
 						   Width="70"
 						   Height="70"
-						   Stretch="Uniform"
+						   Stretch="Fill"
 						   />
 				</Border>
 
@@ -263,7 +263,8 @@
 					  VerticalAlignment="Bottom"
 					  Margin="0,0,0,20"
 					  Background="Transparent"
-					  BorderBrush="Transparent">
+					  BorderBrush="Transparent"
+					  Click="SettingsButton_Click">
 					<Image Source="/Assets/Images/settingsIcon.png"
 						   Width="40"
 						   Height="40"
