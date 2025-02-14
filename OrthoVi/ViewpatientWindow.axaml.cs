@@ -17,12 +17,21 @@ namespace OrthoVi;
 
 public partial class ViewpatientWindow : Window
 {
+    public static ViewpatientWindow? vpw { get; private set; }
+    public static int CliendIndex;
+
     public ViewpatientWindow()
     {
         InitializeComponent();
+
 #if DEBUG
         this.AttachDevTools();
 #endif
+
+        // Assign the current instance to the static property
+        vpw = this;
+
+        // Set up draggable area
         var draggableArea = this.FindControl<Border>("DraggableArea");
         draggableArea.PointerPressed += DraggableArea_PointerPressed;
     }
@@ -77,7 +86,7 @@ public partial class ViewpatientWindow : Window
     private async void DeletePatientButton_Click(object sender, RoutedEventArgs e)
     {
         var dbManager = new DatabaseManager();
-        int clientIndex = int.Parse(ClientIndexTextBlock.Text);
+        int clientIndex = ViewpatientWindow.CliendIndex;
         dbManager.ReadDatabase(SessionManager.LoggedInUser.Username, SessionManager.LoggedInUser.Password);
         var clientToDelete = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex];
 
@@ -104,7 +113,7 @@ public partial class ViewpatientWindow : Window
         if (SessionManager.LoggedInUser?.DoctorInformation != null)
         {
             PatientListWindow patientListWindow = new PatientListWindow();
-            int clientIndex =int.Parse(ClientIndexTextBlock.Text);
+            int clientIndex =ViewpatientWindow.CliendIndex;
             string patientName = patientListWindow.SetPatientInformation_Name(clientIndex);
             string patientAgeGender = patientListWindow.SetPatientInformation_AgeGender(clientIndex);
             PatientNameTB.Text= patientName;
@@ -171,7 +180,7 @@ public partial class ViewpatientWindow : Window
                             .OfType<Avalonia.Controls.Image>()
                             .Where(img => !string.IsNullOrEmpty(img.GetValue<string>(Control.NameProperty)));
 
-        int clientIndex = int.Parse(ClientIndexTextBlock.Text);
+        int clientIndex = ViewpatientWindow.CliendIndex;
         Bitmap bitmap = null;
         var clientImages = SessionManager.LoggedInUser.DoctorInformation.Clients[clientIndex].Images;
 

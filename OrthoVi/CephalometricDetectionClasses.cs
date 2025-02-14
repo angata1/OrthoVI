@@ -11,6 +11,7 @@ using YoloDotNet;
 using YoloDotNet.Enums;
 using YoloDotNet.Extensions;
 using YoloDotNet.Models;
+using static OrthoVi.MainWindow;
 
 
 
@@ -20,41 +21,54 @@ namespace OrthoVi
     {
         internal void Predict(int clientID)
         {
-           
-            using var yolo = new Yolo(new YoloOptions
+            // Step 1: Validate image content
+            byte[] imageData = MainWindow.SessionManager.LoggedInUser.DoctorInformation.Clients[ViewpatientWindow.CliendIndex].Images[0].ImageContent;
+            if (imageData == null || imageData.Length == 0)
             {
-                OnnxModel = @"./YOLO_cephalometric_landmarks.onnx",
-                ModelType = ModelType.ObjectDetection,
-                Cuda = false,
-                GpuId = 0,
-                PrimeGpu = false,
-            });
+                throw new InvalidOperationException("Image content is null or empty.");
+            }
 
-
-            
-            byte[] imageData = MainWindow.SessionManager.LoggedInUser.DoctorInformation.Clients[0].Images[0].ImageContent;
-
-            // Decode the byte array into an SKBitmap
             using var skData = SKData.CreateCopy(imageData);
             using var skBitmap = SKBitmap.Decode(skData);
+            if (skBitmap == null)
+            {
+                throw new InvalidOperationException("Failed to decode image content.");
+            }
 
-            // Create an SKImage from the SKBitmap
-            using var image = SKImage.FromBitmap(skBitmap);
+            // Step 2: Initialize YOLO safely
+            try
+            {
+                using var yolo = new Yolo(new YoloOptions
+                {
+                    OnnxModel = @"./YOLO_cephalometric_landmarks.onnx",
+                    ModelType = ModelType.ObjectDetection,
+                    Cuda = false,
+                    GpuId = 0,
+                    PrimeGpu = false,
+                });
 
-            var results = yolo.RunObjectDetection(image, confidence: 0.15, iou: 0.8);
+                // Run object detection
+                using var image = SKImage.FromBitmap(skBitmap);
+                var results = yolo.RunObjectDetection(image, confidence: 0.15, iou: 0.8);
+                results = RemoveDuplicates(results);
 
-            results = RemoveDuplicates(results);
+                // Draw results on the image
+                using var resultImage = image.Draw(results);
 
+                // Encode the result image to a byte array
+                using var imageEncoded = resultImage.Encode(SKEncodedImageFormat.Png, quality: 100); // Encode as PNG
+                using var memoryStream = new MemoryStream();
+                imageEncoded.SaveTo(memoryStream); // Save encoded image to memory stream
+                byte[] updatedImageData = memoryStream.ToArray(); // Convert to byte array
 
-            using var resultImage = image.Draw(results);
-
-
-            pictureBox2.Image = ConvertToBitmap(resultImage);
-
-            string outputPath = Path.Combine(Environment.CurrentDirectory, "output.jpg");
-            resultImage.Save(outputPath, SKEncodedImageFormat.Jpeg, 80);
-            
-            
+                
+                    SessionManager.LoggedInUser.DoctorInformation.Clients[clientID].Images[0].ImageContent = updatedImageData;
+                
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error during YOLO prediction.", ex);
+            }
         }
 
         // Helper method to convert SKImage to Bitmap

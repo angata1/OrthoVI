@@ -186,7 +186,7 @@ public partial class HomePageWindow : Window
         if (sender is Button btn && btn.Tag is int clientIndex)
         {
             ViewpatientWindow vpw = new ViewpatientWindow();
-            vpw.ClientIndexTextBlock.Text = $"{clientIndex}";
+            ViewpatientWindow.CliendIndex = clientIndex;
             vpw.Show();
             this.Close();
         }

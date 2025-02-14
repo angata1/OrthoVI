@@ -307,7 +307,7 @@
 			 HorizontalAlignment="Left"
 			 Background="Transparent"
 			 Cursor="Hand"/>
-		<TextBlock x:Name="ClientIndexTextBlock" FontSize="1" Foreground="Transparent" />
+		
 	</Grid>
 
 </Window>

@@ -15,6 +15,7 @@ namespace OrthoVi;
 
 public partial class PatientListWindow : Window
 {
+
     public PatientListWindow()
     {
         InitializeComponent();
@@ -24,7 +25,7 @@ public partial class PatientListWindow : Window
         var draggableArea = this.FindControl<Border>("DraggableArea");
         draggableArea.PointerPressed += DraggableArea_PointerPressed;
     }
-
+    
     private void DraggableArea_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
@@ -59,13 +60,14 @@ public partial class PatientListWindow : Window
         this.Close();
     }
 
+
+    
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is int clientIndex)
         { 
-            ViewpatientWindow vpw = new ViewpatientWindow();
-            vpw.ClientIndexTextBlock.Text = $"{clientIndex}";
-            vpw.Show();
+            ViewpatientWindow.vpw.Show();
+            ViewpatientWindow.CliendIndex = clientIndex;
             this.Close();
         }
     }
