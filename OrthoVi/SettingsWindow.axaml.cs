@@ -63,10 +63,7 @@ public partial class SettingsWindow : Window
 
         if (result == ButtonResult.Yes)
         {
-            var dbManager = new DatabaseManager();
-            dbManager.DeleteDatabase(SessionManager.LoggedInUser.Username);
-
-            Environment.Exit(0);
+            TrayWindow.DeleteUser(SessionManager.LoggedInUser.Username, this);
         }
     }
 

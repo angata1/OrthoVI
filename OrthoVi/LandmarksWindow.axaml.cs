@@ -40,6 +40,6 @@ public partial class LandmarksWindow : Window
     {
         HomePageWindow homeWindow = new HomePageWindow();
         homeWindow.Show();
-        this.Hide();
+        this.Close();
     }
 }

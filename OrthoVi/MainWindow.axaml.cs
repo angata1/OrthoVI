@@ -14,14 +14,23 @@ namespace OrthoVi
     {
         public MainWindow()
         {
-
+            
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
             var draggableArea = this.FindControl<Border>("DraggableArea");
             draggableArea.PointerPressed += DraggableArea_PointerPressed;
+            this.Loaded += MainWindow_Loaded;
+            
+
         }
+
+        private void MainWindow_Loaded(object? sender, RoutedEventArgs e)
+        {
+            TrayWindow.Instance.Hide();
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
@@ -66,10 +75,10 @@ namespace OrthoVi
 
                     var result = await box.ShowWindowAsync();
 
-                    TrayWindow trayWindow = new TrayWindow();
+                    
                     HomePageWindow homeWindow = new HomePageWindow();
                     homeWindow.Show();
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -115,7 +124,7 @@ namespace OrthoVi
 
                 var result = await box.ShowWindowAsync();
             }
-
+            
 
         }
 

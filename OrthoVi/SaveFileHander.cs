@@ -162,16 +162,41 @@ public class DatabaseManager
 
     public void DeleteDatabase(string username)
     {
-        string databaseFile = $"{mainPath}{username}.db";
-        if (File.Exists(databaseFile))
+        string directoryPath = Path.Combine(mainPath);
+
+        if (Directory.Exists(directoryPath))
         {
-            // Ensure there are no active connections to the database before deletion.
-            File.Delete(databaseFile);
-            Console.WriteLine("Database deleted successfully.");
+            string[] files = Directory.GetFiles(directoryPath);
+            bool deleted = false;
+
+            foreach (string file in files)
+            {
+                if (Path.GetFileName(file).Contains(username))
+                {
+                    try
+                    {
+                        // Clear SQLite connection pools to release file locks
+                        Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
+
+                        File.Delete(file);
+                        Console.WriteLine($"File '{file}' deleted successfully.");
+                        deleted = true;
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine($"Error deleting file '{file}': {ex.Message}");
+                    }
+                }
+            }
+
+            if (!deleted)
+            {
+                Console.WriteLine("No database files found containing the username.");
+            }
         }
         else
         {
-            Console.WriteLine("Database file not found.");
+            Console.WriteLine("The specified directory does not exist.");
         }
     }
 

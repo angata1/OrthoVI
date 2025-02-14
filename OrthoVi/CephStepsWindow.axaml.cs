@@ -40,12 +40,12 @@ public partial class CephStepsWindow : Window
     {
         HomePageWindow homeWindow = new HomePageWindow();
         homeWindow.Show();
-        this.Hide();
+        this.Close();
     }
     private void LandmarksButton_Click(object sender, RoutedEventArgs e)
     {
         LandmarksWindow lnd = new LandmarksWindow();
         lnd.Show();
-        this.Hide();
+        this.Close();
     }
 }
