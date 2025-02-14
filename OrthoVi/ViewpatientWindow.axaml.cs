@@ -180,10 +180,17 @@ public partial class ViewpatientWindow : Window
             string name = image.GetValue<string>(Control.NameProperty);
             if (!string.IsNullOrEmpty(name))
             {
-                var clientImage = clientImages.FirstOrDefault(img => img.ImageName == "FrontalPhoto");
-                using (var stream = new MemoryStream(clientImage.ImageContent))
+                var clientImage = clientImages.FirstOrDefault(img => img.ImageName == name);
+                if (clientImage == null)
                 {
-                    image.Source = new Bitmap(stream);
+                    image.Source = null;
+                }
+                else
+                {
+                    using (var stream = new MemoryStream(clientImage.ImageContent))
+                    {
+                        image.Source = new Bitmap(stream);
+                    }
                 }
             }
         }

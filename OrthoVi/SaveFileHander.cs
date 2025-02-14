@@ -1,8 +1,8 @@
-﻿// File: DatabaseManager.cs
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using static OrthoVi.MainWindow;
 
 public class DatabaseManager
@@ -59,31 +59,31 @@ public class DatabaseManager
         {
 
 
-        using (var context = new UserDbContext(databaseFile))
-        {
-            var user = context.Users
-                              .Include(u => u.DoctorInformation)
-                                .ThenInclude(d => d.Clients)
-                                  .ThenInclude(c => c.Images)
-                                    .ThenInclude(i => i.Annotation)
-                                      .ThenInclude(a => a.Coordinates)
-                              .FirstOrDefault(u => u.Username == username && u.Password == password);
+            using (var context = new UserDbContext(databaseFile))
+            {
+                var user = context.Users
+                                  .Include(u => u.DoctorInformation)
+                                    .ThenInclude(d => d.Clients)
+                                      .ThenInclude(c => c.Images)
+                                        .ThenInclude(i => i.Annotation)
+                                          .ThenInclude(a => a.Coordinates)
+                                  .FirstOrDefault(u => u.Username == username && u.Password == password);
 
                 if (user == null)
                 {
-                    
+
                     SessionManager.LoggedInUser = null;
                 }
                 else
                 {
                     SessionManager.LoggedInUser = user;
                 }
-                
+
             }
         }
         catch (Exception)
         {
-            
+
         }
     }
 
@@ -159,6 +159,22 @@ public class DatabaseManager
             }
         }
     }
+
+    public void DeleteDatabase(string username)
+    {
+        string databaseFile = $"{mainPath}{username}.db";
+        if (File.Exists(databaseFile))
+        {
+            // Ensure there are no active connections to the database before deletion.
+            File.Delete(databaseFile);
+            Console.WriteLine("Database deleted successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Database file not found.");
+        }
+    }
+
 }
 
 public class UserDbContext : DbContext

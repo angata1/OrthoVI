@@ -58,18 +58,18 @@ namespace OrthoVi
                 dbManager.ReadDatabase(logInUsername, logInPassword);
                 if (SessionManager.LoggedInUser != null)
                 {
-                    
+
 
                     // Show the message box dialog
                     var box = MessageBoxManager
                     .GetMessageBoxStandard("Log In Successful", "You successfully logged in your account!", ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
 
-                     var result = await box.ShowWindowAsync();
+                    var result = await box.ShowWindowAsync();
 
-                     TrayWindow trayWindow = new TrayWindow();
-                     HomePageWindow homeWindow = new HomePageWindow();
-                     homeWindow.Show();
-                     this.Hide();
+                    TrayWindow trayWindow = new TrayWindow();
+                    HomePageWindow homeWindow = new HomePageWindow();
+                    homeWindow.Show();
+                    this.Hide();
                 }
                 else
                 {
@@ -78,7 +78,7 @@ namespace OrthoVi
 
                     var result = await box.ShowWindowAsync();
                 }
-               
+
             }
             else
             {
@@ -87,9 +87,6 @@ namespace OrthoVi
 
                 var result = await box.ShowWindowAsync();
             }
-
-            
-           
         }
         private async void SignUpButton_Click(object sender, RoutedEventArgs e)
         {

@@ -58,14 +58,18 @@ public partial class SettingsWindow : Window
     private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
     {
         var box2 = MessageBoxManager
-                   .GetMessageBoxStandard("Important!", "There are missing images!" + " Are you sure you want to continue?", ButtonEnum.YesNo, MsBox.Avalonia.Enums.Icon.Question);
+                   .GetMessageBoxStandard("Important!", "You are about to delete your account!" + " Are you sure you want to continue?", ButtonEnum.YesNo, MsBox.Avalonia.Enums.Icon.Warning);
         var result = await box2.ShowWindowAsync();
 
         if (result == ButtonResult.Yes)
         {
-            
+            var dbManager = new DatabaseManager();
+            dbManager.DeleteDatabase(SessionManager.LoggedInUser.Username);
+
+            Environment.Exit(0);
         }
     }
+
 
     private async void ProfilePictureButton_Click(object sender, RoutedEventArgs e)
     {
