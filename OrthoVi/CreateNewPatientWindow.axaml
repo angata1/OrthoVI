@@ -14,7 +14,8 @@
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
         SystemDecorations="BorderOnly"
-		Loaded="Window_Loaded">
+		Loaded="Window_Loaded"
+		Icon="avares://OrthoVi/Assets/Images/OrthoViLogoWithBackgroundWhiteFill.ico">
 	<Window.Background>
 		<LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
 			<GradientStop Color="#FFE1F6FA" Offset="0.0" />
