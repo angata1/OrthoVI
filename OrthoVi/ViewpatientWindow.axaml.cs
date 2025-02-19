@@ -17,7 +17,7 @@ namespace OrthoVi;
 
 public partial class ViewpatientWindow : Window
 {
-    public static ViewpatientWindow? vpw { get; private set; }
+    public static ViewpatientWindow? vpw { get; set; }
     public static int CliendIndex;
 
     public ViewpatientWindow()
