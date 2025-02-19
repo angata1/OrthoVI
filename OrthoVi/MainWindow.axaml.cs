@@ -7,6 +7,7 @@ using System;
 using System.Text;
 using MsBox.Avalonia.Enums;
 using MsBox.Avalonia;
+using static OrthoVi.TrayWindow;
 
 namespace OrthoVi
 {
@@ -51,10 +52,7 @@ namespace OrthoVi
             }
         }
 
-        public static class SessionManager
-        {
-            public static User LoggedInUser { get; set; }
-        }
+        
 
 
         private async void LogInButton_Click(object sender, RoutedEventArgs e)

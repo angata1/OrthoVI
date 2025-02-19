@@ -8,7 +8,7 @@ using Avalonia.Media.Imaging;
 using System;
 using System.IO;
 using System.Linq;
-using static OrthoVi.MainWindow;
+using static OrthoVi.TrayWindow;
 
 namespace OrthoVi;
 

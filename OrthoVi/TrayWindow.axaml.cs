@@ -18,6 +18,10 @@ public partial class TrayWindow : Window
         mainWindow.Show();
         
     }
+    public static class SessionManager
+    {
+        public static User LoggedInUser { get; set; }
+    }
 
     public  static void DeleteUser(string username, SettingsWindow settingsWindow)
     {

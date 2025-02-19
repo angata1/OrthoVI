@@ -6,7 +6,7 @@ using Avalonia.Markup.Xaml;
 using MsBox.Avalonia.Enums;
 using MsBox.Avalonia;
 using System;
-using static OrthoVi.MainWindow;
+using static OrthoVi.TrayWindow;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.IO;

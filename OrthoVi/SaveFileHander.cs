@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using static OrthoVi.MainWindow;
+using static OrthoVi.TrayWindow;
 
 public class DatabaseManager
 {

@@ -2,8 +2,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using System;
+using static OrthoVi.TrayWindow;
 
 namespace OrthoVi;
 
@@ -17,6 +17,7 @@ public partial class LandmarksWindow : Window
 #endif
         var draggableArea = this.FindControl<Border>("DraggableArea");
         draggableArea.PointerPressed += DraggableArea_PointerPressed;
+      
     }
     private void DraggableArea_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
@@ -24,8 +25,20 @@ public partial class LandmarksWindow : Window
         {
             // Begin dragging the window only if clicked within the draggable area
             BeginMoveDrag(e);
+
         }
     }
+
+
+
+    private void AI_Landmarks_Click(object sender, RoutedEventArgs e)
+    {
+        CephalometricDetectionClasses cephalometricDetection = new CephalometricDetectionClasses();
+        CephImage.Source = cephalometricDetection.Predict();
+    }
+
+
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Environment.Exit(0);

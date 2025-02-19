@@ -67,6 +67,7 @@
 							Height="84"
 							Margin="-270,-650,0,0"
 							Classes="MainButtonAnimation"
+							Click="AI_Landmarks_Click"
 							HorizontalContentAlignment="Center"
 							VerticalContentAlignment="Center"
 							>
@@ -75,6 +76,7 @@
 						   HorizontalAlignment="Center"
 							VerticalAlignment="Center"
 						   Foreground="White"
+						   
 						   >
 					
 					AI<LineBreak/>LANDMARKS
@@ -151,7 +153,7 @@
 				</Border.Background>
 
 				<Image Source="/Assets/Images/ceph.jpg"
-						   Stretch="Uniform"/>
+						   Stretch="Uniform" Name="CephImage"/>
 			</Border>
 		</Grid>
 

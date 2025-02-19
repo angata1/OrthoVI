@@ -1,4 +1,6 @@
 ﻿using Avalonia.Media.Imaging;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ using YoloDotNet;
 using YoloDotNet.Enums;
 using YoloDotNet.Extensions;
 using YoloDotNet.Models;
-using static OrthoVi.MainWindow;
+using static OrthoVi.TrayWindow;
 
 
 
@@ -19,10 +21,10 @@ namespace OrthoVi
 {
     internal class CephalometricDetectionClasses
     {
-        internal void Predict(int clientID)
+        internal Bitmap Predict()
         {
             // Step 1: Validate image content
-            byte[] imageData = MainWindow.SessionManager.LoggedInUser.DoctorInformation.Clients[ViewpatientWindow.CliendIndex].Images[0].ImageContent;
+            byte[] imageData = SessionManager.LoggedInUser.DoctorInformation.Clients[ViewpatientWindow.CliendIndex].Images[0].ImageContent;
             if (imageData == null || imageData.Length == 0)
             {
                 throw new InvalidOperationException("Image content is null or empty.");
@@ -35,7 +37,7 @@ namespace OrthoVi
                 throw new InvalidOperationException("Failed to decode image content.");
             }
 
-            // Step 2: Initialize YOLO safely
+            // Step 2: Initialize YOLO
             try
             {
                 using var yolo = new Yolo(new YoloOptions
@@ -55,19 +57,15 @@ namespace OrthoVi
                 // Draw results on the image
                 using var resultImage = image.Draw(results);
 
-                // Encode the result image to a byte array
-                using var imageEncoded = resultImage.Encode(SKEncodedImageFormat.Png, quality: 100); // Encode as PNG
-                using var memoryStream = new MemoryStream();
-                imageEncoded.SaveTo(memoryStream); // Save encoded image to memory stream
-                byte[] updatedImageData = memoryStream.ToArray(); // Convert to byte array
-
                 
-                    SessionManager.LoggedInUser.DoctorInformation.Clients[clientID].Images[0].ImageContent = updatedImageData;
+                return ConvertToBitmap(resultImage);
                 
             }
+           
             catch (Exception ex)
             {
-                throw new ApplicationException("Error during YOLO prediction.", ex);
+                MessageBoxManager.GetMessageBoxStandard("Error!","Error during landmark prediction!");
+                return null;
             }
         }
 

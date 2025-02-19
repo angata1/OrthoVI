@@ -9,7 +9,7 @@ using Avalonia.Media.Imaging;
 using System;
 using System.IO;
 using System.Linq;
-using static OrthoVi.MainWindow;
+using static OrthoVi.TrayWindow;
 
 namespace OrthoVi;
 
@@ -65,11 +65,10 @@ public partial class PatientListWindow : Window
     private void ViewPatientButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is int clientIndex)
-        { 
+        {
             ViewpatientWindow.CliendIndex = clientIndex;
             ViewpatientWindow.vpw = new ViewpatientWindow();
             ViewpatientWindow.vpw.Show();
-            ViewpatientWindow.CliendIndex = clientIndex;
             this.Close();
         }
     }
