@@ -66,6 +66,8 @@ public partial class PatientListWindow : Window
     {
         if (sender is Button btn && btn.Tag is int clientIndex)
         { 
+            ViewpatientWindow.CliendIndex = clientIndex;
+            ViewpatientWindow.vpw = new ViewpatientWindow();
             ViewpatientWindow.vpw.Show();
             ViewpatientWindow.CliendIndex = clientIndex;
             this.Close();
