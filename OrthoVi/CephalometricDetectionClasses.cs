@@ -24,50 +24,48 @@ namespace OrthoVi
         internal Bitmap Predict()
         {
             // Step 1: Validate image content
-            byte[] imageData = SessionManager.LoggedInUser.DoctorInformation.Clients[ViewpatientWindow.CliendIndex].Images[0].ImageContent;
-            if (imageData == null || imageData.Length == 0)
-            {
-                throw new InvalidOperationException("Image content is null or empty.");
-            }
+            byte[] imageData = LandmarksWindow.FindCephImage();
 
-            using var skData = SKData.CreateCopy(imageData);
-            using var skBitmap = SKBitmap.Decode(skData);
-            if (skBitmap == null)
-            {
-                throw new InvalidOperationException("Failed to decode image content.");
-            }
-
-            // Step 2: Initialize YOLO
-            try
-            {
-                using var yolo = new Yolo(new YoloOptions
+          
+                using var skData = SKData.CreateCopy(imageData);
+                using var skBitmap = SKBitmap.Decode(skData);
+                if (skBitmap == null)
                 {
-                    OnnxModel = @"./YOLO_cephalometric_landmarks.onnx",
-                    ModelType = ModelType.ObjectDetection,
-                    Cuda = false,
-                    GpuId = 0,
-                    PrimeGpu = false,
-                });
+                    throw new InvalidOperationException("Failed to decode image content.");
+                }
 
-                // Run object detection
-                using var image = SKImage.FromBitmap(skBitmap);
-                var results = yolo.RunObjectDetection(image, confidence: 0.15, iou: 0.8);
-                results = RemoveDuplicates(results);
+                // Step 2: Initialize YOLO
+                try
+                {
+                    using var yolo = new Yolo(new YoloOptions
+                    {
+                        OnnxModel = @"./YOLO_cephalometric_landmarks.onnx",
+                        ModelType = ModelType.ObjectDetection,
+                        Cuda = false,
+                        GpuId = 0,
+                        PrimeGpu = false,
+                    });
 
-                // Draw results on the image
-                using var resultImage = image.Draw(results);
+                    // Run object detection
+                    using var image = SKImage.FromBitmap(skBitmap);
+                    var results = yolo.RunObjectDetection(image, confidence: 0.15, iou: 0.8);
+                    results = RemoveDuplicates(results);
 
-                
-                return ConvertToBitmap(resultImage);
-                
+                    // Draw results on the image
+                    using var resultImage = image.Draw(results);
+
+
+                    return ConvertToBitmap(resultImage);
+
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBoxManager.GetMessageBoxStandard("Error!", "Error during landmark prediction!");
+                    return null;
+                }
             }
-           
-            catch (Exception ex)
-            {
-                MessageBoxManager.GetMessageBoxStandard("Error!","Error during landmark prediction!");
-                return null;
-            }
-        }
+        
 
         // Helper method to convert SKImage to Bitmap
         private Bitmap ConvertToBitmap(SKImage skImage)

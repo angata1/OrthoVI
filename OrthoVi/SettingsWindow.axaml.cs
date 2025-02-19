@@ -12,7 +12,7 @@ using System.IO;
 using Avalonia.Platform.Storage;
 using System.Net;
 using Avalonia.Media.Imaging;
-using static OrthoVi.MainWindow;
+using static OrthoVi.TrayWindow;
 
 namespace OrthoVi;
 
