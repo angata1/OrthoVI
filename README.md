@@ -1,7 +1,7 @@
 This program is created using Avalonia UI.
 Link to the official site of Avalonia UI: https://avaloniaui.net/
 
-To be able to build the code in Visual Studio, you will need to download a few things:
+To be able to build the code in Visual Studio, you will need to:
    
 1. Install the Avalonia Visual Studio extension:
    
