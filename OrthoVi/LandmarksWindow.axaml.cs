@@ -32,7 +32,7 @@ public partial class LandmarksWindow : Window
 
     internal static byte[] FindCephImage()
     {
-        byte[] image = SessionManager.LoggedInUser.DoctorInformation.Clients[ViewpatientWindow.CliendIndex].Images.Find(x => x.ImageName == "Lateral Ceph").ImageContent;
+        byte[] image = SessionManager.LoggedInUser.DoctorInformation.Clients[ViewpatientWindow.CliendIndex].Images.Find(x => x.ImageName == "LateralCeph").ImageContent;
         if (image == null || image.Length == 0)
         {
             MessageBoxManager.GetMessageBoxStandard("Error!", "No cephalometric image!");
