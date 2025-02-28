@@ -86,7 +86,7 @@
 							HorizontalAlignment="Center"
 							Click="LandmarksButton_Click"
 							/>
-					<Button Content="STEP 1: ANALYSIS"
+					<Button Content="STEP 2: ANALYSIS"
 							FontSize="32"
 							FontWeight="Bold"
 							Width="700"
